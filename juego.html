@@ -1,0 +1,35 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Piedra, papel o tijera</title>
+    <script>
+        let jugador = 0
+        let pc = 2
+        jugador = prompt("Elige: 1 para piedra, 2 para papel y 3 para tijera")
+        let opciones = ['piedra','papel','tijera']
+        alert('Elegiste ' + opciones[jugador-1])
+        alert('PC eligio ' + opciones[pc-1])
+        
+        /// combateee //////
+        if (pc==jugador){
+            alert('Empate')
+        }else if (jugador ==1 && pc == 3){
+            alert('Ganaste')
+        }else if (jugador == 2 && pc == 1) {
+            alert('Ganaste')
+        }else if (jugador == 3 && pc == 2) {
+            alert('Ganaste')
+        }else {
+            alert('Perdiste')
+        }
+
+    </script>
+</head>
+<body>
+    <h1> Esto es piedra papel y tijera !!!</h1>
+</body>
+</html>
