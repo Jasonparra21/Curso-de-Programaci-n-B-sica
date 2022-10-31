@@ -60,12 +60,19 @@ function earthAttack(){
     alert(playerattack)
     enemyRandomAttack()
 }
-
 function enemyRandomAttack (){
     let RandomAttack = randomselector(1,4)
     enemyAttack = Attacks[RandomAttack-1]
-} 
+    messageCreator()
+}
+function messageCreator(){
+    let messageSection = document.getElementById('message')
+    let paragraph = document.createElement('p')
+    paragraph.innerHTML = 'Your pet attacked with ' + playerattack + ', the enemys pet attacked with '+ enemyAttack +' you'
+    messageSection.appendChild(paragraph)
+}
 window.addEventListener('load',startgame)
+
 
 
 
