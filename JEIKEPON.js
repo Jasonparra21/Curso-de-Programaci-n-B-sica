@@ -75,11 +75,25 @@ function combat() {
         playerLives--
         spanPlayerLives.innerHTML= playerLives
     }
+    countLives()
+}
+function countLives(){
+    if (enemyLives == 0){
+        finalMessage("Congratulations, you win!")
+    }else if (playerLives == 0){
+        finalMessage("Unfortunately, you lost!")
+    }
 }
 function messageCreator(result){
     let messageSection = document.getElementById('message')
     let paragraph = document.createElement('p')
     paragraph.innerHTML = 'Your pet attacked with ' + playerattack + ', the enemys pet attacked with '+ enemyAttack +' you ' + result
+    messageSection.appendChild(paragraph)
+}
+function finalMessage(finalResult){
+    let messageSection = document.getElementById('message')
+    let paragraph = document.createElement('p')
+    paragraph.innerHTML = finalResult
     messageSection.appendChild(paragraph)
 }
 window.addEventListener('load',startgame)
