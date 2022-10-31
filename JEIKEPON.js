@@ -2,6 +2,8 @@ let Pets = ['Drawid','Orchiwet','Toprock','Vessptox','Frogblex','WhitePhoenix','
 let Attacks =['Wind','Fire','Water','Earth' ]
 let playerattack 
 let enemyAttack
+let playerLives = 3 
+let enemyLives  = 3
 function startgame(){
     let petButton = document.getElementById('pet-button')
     petButton.addEventListener('click', petchoose)
@@ -60,22 +62,18 @@ function enemyRandomAttack (){
     combat()
 }
 function combat() {
+    let spanPlayerLives = document.getElementById('playerLives')
+    let spanEnemysLives = document.getElementById('enemyLives')
     if (playerattack == enemyAttack){
         messageCreator('Draw!')
-    }else if (playerattack == Attacks[2] && enemyAttack == Attacks[1]){
+    }else if ((playerattack == Attacks[2] && enemyAttack == Attacks[1]) || (playerattack == Attacks[2] && enemyAttack == Attacks[0])||(playerattack == Attacks[1] && enemyAttack == Attacks[3])||(playerattack == Attacks[1] && enemyAttack == Attacks[0])|| (playerattack == Attacks[0] && enemyAttack == Attacks[3])||(playerattack == Attacks[3] && enemyAttack == Attacks[2])){
         messageCreator('Win!')
-    }else if (playerattack == Attacks[2] && enemyAttack == Attacks[0]) {
-        messageCreator('Win!')
-    }else if (playerattack == Attacks[1] && enemyAttack == Attacks[3]) {
-        messageCreator('Win!')
-    }else if (playerattack == Attacks[1] && enemyAttack == Attacks[0]) {
-        messageCreator('Win!')
-    }else if (playerattack == Attacks[0] && enemyAttack == Attacks[3]) {
-        messageCreator('Win!')
-    }else if (playerattack == Attacks[3] && enemyAttack == Attacks[2]) {
-        messageCreator('Win!')
+        enemyLives--
+        spanEnemysLives.innerHTML= enemyLives
     }else {
         messageCreator('lost!')
+        playerLives--
+        spanPlayerLives.innerHTML= playerLives
     }
 }
 function messageCreator(result){
