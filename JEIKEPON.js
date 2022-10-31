@@ -17,6 +17,13 @@ function petchoose(){
     if (a==Pets.length) {
         alert('Choose at least 1 pet')  
     }
+    enemyspetchoose()
+}
+
+function enemyspetchoose(){
+    let enemy =Math.floor(Math.random()*(8-1+1)+1)
+    let spanEnemysPet = document.getElementById('enemysPet')
+    spanEnemysPet.innerHTML = Pets[enemy-1]
 }
 window.addEventListener('load',startgame)
 
