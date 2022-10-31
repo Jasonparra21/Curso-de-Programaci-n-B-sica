@@ -1,8 +1,23 @@
+let Pets = ['Drawid','Orchiwet','Toprock','Vessptox','Frogblex','WhitePhoenix','Massivehummingbird','xcorpion']
+let Attacks =['Wind','Fire','Water','Earth' ]
+let playerattack 
+let enemyAttack
+
 function startgame(){
     let petButton = document.getElementById('pet-button')
-    petButton.addEventListener('click',petchoose)
+    petButton.addEventListener('click', petchoose)
+    let windButton = document.getElementById('wind-button')
+    windButton.addEventListener('click', windAttack)
+    let fireButton = document.getElementById('fire-button')
+    fireButton.addEventListener('click', fireAttack)
+    let waterButton = document.getElementById('water-button')
+    waterButton.addEventListener('click', waterAttack)
+    let earthButton = document.getElementById('earth-button')
+    earthButton.addEventListener('click', earthAttack)
 }
-let Pets=['Drawid','Orchiwet','Toprock','Vessptox','Frogblex','WhitePhoenix','Massivehummingbird','xcorpion'  ]
+function randomselector (min,max){
+    return Math.floor(Math.random()*(max-min+1)+min)
+}
 function petchoose(){
     let a = 0
     for (var i = 0; i < 8 ; i++){
@@ -19,12 +34,37 @@ function petchoose(){
     }
     enemyspetchoose()
 }
-
-function enemyspetchoose(){
-    let enemy =Math.floor(Math.random()*(8-1+1)+1)
+ function enemyspetchoose(){
+    let enemy = randomselector(1,8)
     let spanEnemysPet = document.getElementById('enemysPet')
     spanEnemysPet.innerHTML = Pets[enemy-1]
 }
+
+function windAttack(){
+    playerattack = 'Wind'
+    alert(playerattack)
+    enemyRandomAttack()
+}
+function fireAttack(){
+    playerattack = 'Fire'
+    alert(playerattack)
+    enemyRandomAttack()
+}
+function waterAttack(){
+    playerattack = 'Water'
+    alert(playerattack)
+    enemyRandomAttack()
+}
+function earthAttack(){
+    playerattack = 'Earth'
+    alert(playerattack)
+    enemyRandomAttack()
+}
+
+function enemyRandomAttack (){
+    let RandomAttack = randomselector(1,4)
+    enemyAttack = Attacks[RandomAttack-1]
+} 
 window.addEventListener('load',startgame)
 
 
