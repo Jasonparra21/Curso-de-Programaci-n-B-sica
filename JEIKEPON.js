@@ -2,7 +2,6 @@ let Pets = ['Drawid','Orchiwet','Toprock','Vessptox','Frogblex','WhitePhoenix','
 let Attacks =['Wind','Fire','Water','Earth' ]
 let playerattack 
 let enemyAttack
-
 function startgame(){
     let petButton = document.getElementById('pet-button')
     petButton.addEventListener('click', petchoose)
@@ -39,36 +38,50 @@ function petchoose(){
     let spanEnemysPet = document.getElementById('enemysPet')
     spanEnemysPet.innerHTML = Pets[enemy-1]
 }
-
 function windAttack(){
     playerattack = 'Wind'
-    alert(playerattack)
     enemyRandomAttack()
 }
 function fireAttack(){
     playerattack = 'Fire'
-    alert(playerattack)
     enemyRandomAttack()
 }
 function waterAttack(){
     playerattack = 'Water'
-    alert(playerattack)
     enemyRandomAttack()
 }
 function earthAttack(){
     playerattack = 'Earth'
-    alert(playerattack)
     enemyRandomAttack()
 }
 function enemyRandomAttack (){
     let RandomAttack = randomselector(1,4)
     enemyAttack = Attacks[RandomAttack-1]
-    messageCreator()
+    combat()
 }
-function messageCreator(){
+function combat() {
+    if (playerattack == enemyAttack){
+        messageCreator('Draw!')
+    }else if (playerattack == Attacks[2] && enemyAttack == Attacks[1]){
+        messageCreator('Win!')
+    }else if (playerattack == Attacks[2] && enemyAttack == Attacks[0]) {
+        messageCreator('Win!')
+    }else if (playerattack == Attacks[1] && enemyAttack == Attacks[3]) {
+        messageCreator('Win!')
+    }else if (playerattack == Attacks[1] && enemyAttack == Attacks[0]) {
+        messageCreator('Win!')
+    }else if (playerattack == Attacks[0] && enemyAttack == Attacks[3]) {
+        messageCreator('Win!')
+    }else if (playerattack == Attacks[3] && enemyAttack == Attacks[2]) {
+        messageCreator('Win!')
+    }else {
+        messageCreator('lost!')
+    }
+}
+function messageCreator(result){
     let messageSection = document.getElementById('message')
     let paragraph = document.createElement('p')
-    paragraph.innerHTML = 'Your pet attacked with ' + playerattack + ', the enemys pet attacked with '+ enemyAttack +' you'
+    paragraph.innerHTML = 'Your pet attacked with ' + playerattack + ', the enemys pet attacked with '+ enemyAttack +' you ' + result
     messageSection.appendChild(paragraph)
 }
 window.addEventListener('load',startgame)
