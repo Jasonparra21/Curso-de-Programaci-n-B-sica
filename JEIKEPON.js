@@ -15,6 +15,8 @@ function startgame(){
     waterButton.addEventListener('click', waterAttack)
     let earthButton = document.getElementById('earth-button')
     earthButton.addEventListener('click', earthAttack)
+    let restartButton = document.getElementById('Restart')
+    restartButton.addEventListener('click', restart)
 }
 function randomselector (min,max){
     return Math.floor(Math.random()*(max-min+1)+min)
@@ -95,6 +97,17 @@ function finalMessage(finalResult){
     let paragraph = document.createElement('p')
     paragraph.innerHTML = finalResult
     messageSection.appendChild(paragraph)
+    let windButton = document.getElementById('wind-button')
+    windButton.disabled =true
+    let fireButton = document.getElementById('fire-button')
+    fireButton.disabled =true
+    let waterButton = document.getElementById('water-button')
+    waterButton.disabled =true
+    let earthButton = document.getElementById('earth-button')
+    earthButton.disabled =true
+}
+function restart(){
+    location.reload()
 }
 window.addEventListener('load',startgame)
 
