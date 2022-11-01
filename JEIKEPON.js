@@ -5,6 +5,10 @@ let enemyAttack
 let playerLives = 3 
 let enemyLives  = 3
 function startgame(){
+    let restartButton = document.getElementById('Restart')
+    restartButton.style.display = 'none'
+    let chooseAttack = document.getElementById('Choose_attack')
+    chooseAttack.style.display  = 'none'
     let petButton = document.getElementById('pet-button')
     petButton.addEventListener('click', petchoose)
     let windButton = document.getElementById('wind-button')
@@ -15,13 +19,16 @@ function startgame(){
     waterButton.addEventListener('click', waterAttack)
     let earthButton = document.getElementById('earth-button')
     earthButton.addEventListener('click', earthAttack)
-    let restartButton = document.getElementById('Restart')
     restartButton.addEventListener('click', restart)
 }
 function randomselector (min,max){
     return Math.floor(Math.random()*(max-min+1)+min)
 }
 function petchoose(){
+    let choosePet = document.getElementById('Choose_pet')
+    choosePet.style.display  = 'none'
+    let chooseAttack = document.getElementById('Choose_attack')
+    chooseAttack.style.display  = 'block'
     let a = 0
     for (var i = 0; i < 8 ; i++){
         let pet = document.getElementById(Pets[i])
@@ -41,6 +48,7 @@ function petchoose(){
     let enemy = randomselector(1,8)
     let spanEnemysPet = document.getElementById('enemysPet')
     spanEnemysPet.innerHTML = Pets[enemy-1]
+    
 }
 function windAttack(){
     playerattack = 'Wind'
@@ -105,6 +113,8 @@ function finalMessage(finalResult){
     waterButton.disabled =true
     let earthButton = document.getElementById('earth-button')
     earthButton.disabled =true
+    let restartButton = document.getElementById('Restart')
+    restartButton.style.display ='block'
 }
 function restart(){
     location.reload()

@@ -1,0 +1,35 @@
+.game_title{
+    color: palevioletred;
+    width: 355px;
+    height: 50px;
+    background-color: teal;
+}
+
+#Choose_pet {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+}
+
+.Jeikepon_card {
+    width: 200px;
+    height: 100px;
+    background-color: beige;
+    padding: 10px;
+    box-sizing: border-box;
+    margin: 5px;
+    border: 1px solid hotpink;
+}
+#pet-button {
+    margin: 5px;
+    height: 100px;
+    background-color: darkcyan;
+    width: 100px;
+    border: 1px dashed double none salmon;
+    padding: 5px;
+}
+input{
+    display: none;
+}
