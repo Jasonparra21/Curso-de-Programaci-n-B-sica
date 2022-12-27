@@ -28,7 +28,7 @@ function petchoose(){
     let choosePet = document.getElementById('Choose_pet')
     choosePet.style.display  = 'none'
     let chooseAttack = document.getElementById('Choose_attack')
-    chooseAttack.style.display  = 'block'
+    chooseAttack.style.display  = 'flex'
     let a = 0
     for (var i = 0; i < 8 ; i++){
         let pet = document.getElementById(Pets[i])
@@ -37,17 +37,20 @@ function petchoose(){
             //alert('you choose ' + Pets[i])
             spanPlayerPet.innerHTML = Pets[i]
         } else {
-            a=a+1}
-    }
-    if (a==Pets.length) {
-        alert('Choose at least 1 pet')  
+            a=a+1
+            if (a==6) {
+                alert('Choose at least 1 pet')
+                location.reload()
+            }
+        }
     }
     enemyspetchoose()
 }
  function enemyspetchoose(){
     let enemy = randomselector(1,8)
+    let Enemyspet = document.getElementById(Pets[enemy-1])
     let spanEnemysPet = document.getElementById('enemysPet')
-    spanEnemysPet.innerHTML = Pets[enemy-1]
+    spanEnemysPet.innerHTML = Enemyspet
     
 }
 function windAttack(){
@@ -95,16 +98,23 @@ function countLives(){
     }
 }
 function messageCreator(result){
-    let messageSection = document.getElementById('message')
-    let paragraph = document.createElement('p')
-    paragraph.innerHTML = 'Your pet attacked with ' + playerattack + ', the enemys pet attacked with '+ enemyAttack +' you ' + result
-    messageSection.appendChild(paragraph)
+    let messageSection = document.getElementById('Result')
+    let player_attacks = document.getElementById('player-attacks')
+    let enemy_attacks = document.getElementById('enemy-attacks')
+    
+    let newPlayerAttack= document.createElement('p')
+    let newEnemyAttack = document.createElement('p')
+    
+    messageSection.innerHTML = result
+    newPlayerAttack.innerHTML = playerattack
+    newEnemyAttack.innerHTML = enemyAttack
+    
+    player_attacks.appendChild(newPlayerAttack)
+    enemy_attacks.appendChild(newEnemyAttack)
 }
 function finalMessage(finalResult){
-    let messageSection = document.getElementById('message')
-    let paragraph = document.createElement('p')
-    paragraph.innerHTML = finalResult
-    messageSection.appendChild(paragraph)
+    let messageSection = document.getElementById('Result')
+    messageSection.innerHTML = finalResult
     let windButton = document.getElementById('wind-button')
     windButton.disabled =true
     let fireButton = document.getElementById('fire-button')
@@ -120,7 +130,6 @@ function restart(){
     location.reload()
 }
 window.addEventListener('load',startgame)
-
 
 
 
