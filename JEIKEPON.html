@@ -14,46 +14,46 @@
         <h2 class="subtitle"> Choose your Pet</h2>
 
         <div class="Cards"> 
+            <input type="radio" name="pet" id="Drawid"/> 
             <label class="Jeikepon_card" for="Drawid">
                 <p>Drawid</p>
                 <img src="./Img/Blue-Dragon.png" alt="Drawid">
             </label>
-        <input type="radio" name="pet" id="Drawid"/> 
-        <label class="Jeikepon_card" for="Orchiwet">
+            <input type="radio" name="pet" id="Orchiwet"/>
+            <label class="Jeikepon_card" for="Orchiwet">
             <p>Orchiwet</p>
                 <img src="./Img/Orchiwet.png" alt="Orchiwet">
-        </label>
-        <input type="radio" name="pet" id="Orchiwet"/> 
+        </label> 
+        <input type="radio" name="pet" id="Toprock"/>
         <label class="Jeikepon_card" for="Toprock">
             <p>Toprock</p>
                 <img src="./Img/Toprock.png" alt="Toprock">
-        </label>
-        <input type="radio" name="pet" id="Toprock"/>  
+        </label>  
+        <input type="radio" name="pet" id="Vessptox"/>
         <label class="Jeikepon_card" for="Vessptox">
             <p>Vessptox</p>
                 <img src="./Img/Vessptox.png" alt="Vessptox">
         </label> 
-        <input type="radio" name="pet" id="Vessptox"/>
+        <input type="radio" name="pet" id="Frogblex"/>
         <label class="Jeikepon_card" for="Frogblex">
             <p>Frogblex</p>
                 <img src="./Img/Frogblex.png" alt="Frogblex">
-        </label> 
-        <input type="radio" name="pet" id="Frogblex"/>
+        </label>
+        <input type="radio" name="pet" id="WhitePhoenix"/>
         <label class="Jeikepon_card" for="WhitePhoenix">
             <p>WhitePhoenix</p>
                 <img src="./Img/Whitephoenix.png" alt="WhitePhoenix">
-        </label> 
-        <input type="radio" name="pet" id="WhitePhoenix"/>
+        </label>
+        <input type="radio" name="pet" id="RazorEagle"/>
         <label class="Jeikepon_card" for="RazorEagle">
             <p>RazorEagle</p>
                 <img src="./Img/RazorEagle.png" alt="RazorEagle">
         </label>
-        <input type="radio" name="pet" id="RazorEagle"/>
+        <input type="radio" name="pet" id="Xcorpion"/>
         <label class="Jeikepon_card" for="Xcorpion">
             <p>Xcorpion</p>
                 <img src="./Img/Xcorpion.png" alt="Xcorpion">
         </label>
-        <input type="radio" name="pet" id="Xcorpion"/>
         </div>        
         <!-- Drawid -> Fire & Air //Dragon
         Orchiwet -> Air & Water // orquidea
@@ -69,7 +69,7 @@
     <section id="Choose_attack">
         <h1 class="game_title"> JEIKEPON! 🌬️🔥💦🪨</h1>
         <h2 class="subtitle"> Choose yout attack </h2>
-        <div>
+        <div class="attack-cards">
             <button id="wind-button" class="atack-button"> Wind 🌬️</button>
             <button id="fire-button" class="atack-button"> Fire 🔥</button>
             <button id="water-button" class="atack-button"> Water 💦</button>
@@ -82,11 +82,17 @@
             <button id="restart-button">Restart</button>
             </section>
         </div>
-        <div>
-            <div id="player-attacks"></div>
-            <div id="enemy-attacks"></div>
-            <p>Your pet   <span id="playerPet"></span> has <span id="playerLives">3</span> lives</p>
-            <p>The enemy's pet <span id="enemysPet"></span> has <span id="enemyLives">3</span> lives</p>
+        <div class="attack">
+            <div class="player-attacks">
+                <p id="playerLives">3</p>
+                <p id="playerPet"></p>
+                <div id="player-attacks"></div>
+            </div>
+            <div class="enemy-attacks">
+                <p id="enemyLives">3</p>
+                <p id="enemysPet"></p>
+                <div id="enemy-attacks"></div>
+            </div>
         </div>
     </section>  
 </body>
