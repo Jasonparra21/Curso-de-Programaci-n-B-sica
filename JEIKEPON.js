@@ -18,10 +18,89 @@ const messageSection = document.getElementById('Result')
 const player_attacks = document.getElementById('player-attacks')
 const enemy_attacks = document.getElementById('enemy-attacks')
 
+let jeikepones = []
 let playerattack 
 let enemyAttack
 let playerLives = 3 
 let enemyLives  = 3
+
+class Jeikepon {
+    constructor (name, pic, live){
+
+        this.name = name
+        this.pic = pic
+        this.live = live
+        this.attackss =[]
+    }
+}
+
+let Drawid = new  Jeikepon ('Drawid','./Img/Blue-Dragon.png', 5)
+let Orchiwet = new Jeikepon ('Orchiwet', './Img/Orchiwet.png',5)
+let Toprock = new Jeikepon ('Toprock','./Img/Toprock.png', 5)
+let Vessptox = new Jeikepon ('Vessptox','./Img/Vessptox.png', 5)
+let Frogblex = new Jeikepon ('Frogblex', './Img/Frogblex.png', 5)
+let WhitePhoenix = new Jeikepon ('WhitePhoenix', './Img/Whitephoenix.png', 5)
+let RazorEagle = new Jeikepon ('RazorEagle','./Img/RazorEagle.png', 5)
+let Xcorpion = new Jeikepon ('Xcorpion','./Img/Xcorpion.png', 5)
+
+Drawid.attackss.push(
+    {name: '🔥', id:'fire-button'},
+    {name: '🔥', id:'fire-button'},
+    {name: '🔥', id:'fire-button'},
+    {name: '🌬️', id:'wind-button'},
+    {name: '🪨', id:'earth-button'}
+)
+Orchiwet.attackss.push(
+    {name: '💦', id:'water-button'},
+    {name: '💦', id:'water-button'},
+    {name: '🌬️', id:'wind-button'},
+    {name: '🌬️', id:'wind-button'},
+    {name: '🪨', id:'earth-button'}
+)
+Toprock.attackss.push(
+    {name: '💦', id:'water-button'},
+    {name: '💦', id:'water-button'},
+    {name: '🪨', id:'earth-button'},
+    {name: '🪨', id:'earth-button'},
+    {name: '🪨', id:'earth-button'}
+)
+Vessptox.attackss.push(
+    {name: '🔥', id:'fire-button'},
+    {name: '🌬️', id:'wind-button'},
+    {name: '🪨', id:'earth-button'},
+    {name: '🪨', id:'earth-button'},
+    {name: '🪨', id:'earth-button'}
+)
+Frogblex.attackss.push(
+    {name: '💦', id:'water-button'},
+    {name: '💦', id:'water-button'},
+    {name: '🔥', id:'fire-button'},
+    {name: '💦', id:'water-button'},
+    {name: '🪨', id:'earth-button'}
+)
+WhitePhoenix.attackss.push(
+    {name: '🔥', id:'fire-button'},
+    {name: '🔥', id:'fire-button'},
+    {name: '🔥', id:'fire-button'},
+    {name: '🌬️', id:'wind-button'},
+    {name: '🌬️', id:'wind-button'}
+)
+RazorEagle.attackss.push(
+    {name: '🌬️', id:'wind-button'},
+    {name: '🌬️', id:'wind-button'},
+    {name: '🌬️', id:'wind-button'},
+    {name: '🌬️', id:'wind-button'},
+    {name: '🪨', id:'earth-button'}
+)
+Xcorpion.attackss.push(
+    {name: '🔥', id:'fire-button'},
+    {name: '🪨', id:'earth-button'},
+    {name: '🪨', id:'earth-button'},
+    {name: '🪨', id:'earth-button'},
+    {name: '🪨', id:'earth-button'}
+)
+console.log(Jeikepon)
+jeikepones.push()
 function startgame(){
     restartButton.style.display = 'none'
     chooseAttack.style.display  = 'none'
