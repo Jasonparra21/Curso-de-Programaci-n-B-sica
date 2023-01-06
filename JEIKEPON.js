@@ -17,9 +17,11 @@ const spanEnemysLives = document.getElementById('enemyLives')
 const messageSection = document.getElementById('Result')
 const player_attacks = document.getElementById('player-attacks')
 const enemy_attacks = document.getElementById('enemy-attacks')
+const Cardscontainer = document.getElementById('Cardscontainer')
 
 let jeikepones = []
 let playerattack 
+let jeikeponsoption
 let enemyAttack
 let playerLives = 3 
 let enemyLives  = 3
@@ -99,11 +101,20 @@ Xcorpion.attackss.push(
     {name: '🪨', id:'earth-button'},
     {name: '🪨', id:'earth-button'}
 )
-console.log(Jeikepon)
-jeikepones.push()
+jeikepones.push(Drawid,Orchiwet,Toprock,Vessptox,Frogblex,WhitePhoenix,RazorEagle,Xcorpion)
 function startgame(){
     restartButton.style.display = 'none'
     chooseAttack.style.display  = 'none'
+    jeikepones.forEach((jeikepon) => {
+       jeikeponsoption = `
+       <input type="radio" name="pet" id=${jeikepon.name}/> 
+            <label class="Jeikepon_card" for=${jeikepon.name}>
+                <p>${jeikepon.name}</p>
+                <img src=${jeikepon.pic} alt=${jeikepon.name}>
+            </label>
+       `
+       Cardscontainer.innerHTML += jeikeponsoption
+    })
     petButton.addEventListener('click', petchoose)
     windButton.addEventListener('click', windAttack)
     fireButton.addEventListener('click', fireAttack)
