@@ -22,7 +22,7 @@ const attacksContainer = document.getElementById('attacks_container')
 let jeikepones = []
 let playerattack 
 let jeikeponsoption
-let enemyAttack
+let enemyAttack = []
 let inputDrawid
 let inputOrchiwet
 let inputToprock 
@@ -33,6 +33,7 @@ let inputRazorEagle
 let inputXcorpion 
 let playersPet
 let jeikeponattacks
+let enemyJeikeponAttacks
 let windButton 
 let fireButton 
 let waterButton
@@ -222,21 +223,28 @@ function petchoose(){
             } else {
                 playerattacks.push('EARTH')
                 button.style.background = '#112f58'
-
             }
-
-            
+            enemyRandomAttack ()
         })
     })
  }
  function enemyspetchoose(){
     let enemy = randomselector(0,jeikepones.length-1)
     spanEnemysPet.innerHTML = jeikepones[enemy].namee
+    enemyJeikeponAttacks = jeikepones[enemy].attackss
     AttackSecuense()
 }
 function enemyRandomAttack (){
-    let RandomAttack = randomselector(1,4)
-    enemyAttack = Attacks[RandomAttack-1]
+    let RandomAttack = randomselector(0,enemyJeikeponAttacks.length-1)
+    if(RandomAttack ==0||RandomAttack ==1){
+        enemyAttack.push('FIRE')
+    } else if(RandomAttack ==2){
+        enemyAttack.push('WIND')
+    } else if(RandomAttack ==3){
+        enemyAttack.push('WATER')
+    } else {
+        enemyAttack.push('EARTH')
+    }    
     combat()
 }
 function combat() {
@@ -272,11 +280,11 @@ function messageCreator(result){
 }
 function finalMessage(finalResult){
     messageSection.innerHTML = finalResult
-    windButton.disabled =true
-    fireButton.disabled =true
-    waterButton.disabled =true
-    earthButton.disabled =true
-    sectionRestart.style.display ='block'
+    windButton.disabled = true
+    fireButton.disabled = true
+    waterButton.disabled = true
+    earthButton.disabled = true
+    sectionRestart.style.display = 'block'
 }
 function restart(){
     location.reload()
