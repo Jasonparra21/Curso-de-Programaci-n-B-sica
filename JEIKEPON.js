@@ -4,25 +4,24 @@ sectionRestart.style.display = 'none'
 const petButton = document.getElementById('pet-button')
 const restartButton = document.getElementById('restart-button')
 
-const Attacks =['Wind','Fire','Water','Earth' ]
-
 const choosePet = document.getElementById('Choose_pet')
 const spanPlayerPet =document.getElementById('playerPet')
+
 const spanEnemysPet = document.getElementById('enemysPet')
 
 const spanPlayerLives = document.getElementById('playerLives')
 const spanEnemysLives = document.getElementById('enemyLives')
 
-const messageSection = document.getElementById('Result')
+const messageSection = document.getElementById('RESULT')
 const player_attacks = document.getElementById('player-attacks')
 const enemy_attacks = document.getElementById('enemy-attacks')
 const Cardscontainer = document.getElementById('Cards_container')
 const attacksContainer = document.getElementById('attacks_container')
 
 let jeikepones = []
-let playerattack 
-let jeikeponsoption
+let playerattack =[]
 let enemyAttack = []
+let jeikeponsoption
 let inputDrawid
 let inputOrchiwet
 let inputToprock 
@@ -39,18 +38,18 @@ let fireButton
 let waterButton
 let earthButton 
 let buttons = []
-let playerattacks =[]
-
-let playerLives = 3 
-let enemyLives  = 3
+let indexenemyAttack
+let indexplayerAttack
+let playerwins = 0
+let enemywins = 0
 
 class Jeikepon {
-    constructor (namee, pic, live){
+    constructor (nombre, pic, live){
 
-        this.namee = namee
+        this.nombre = nombre
         this.pic = pic
         this.live = live
-        this.attackss =[]
+        this.attacks =[]
     }
 }
 
@@ -63,61 +62,61 @@ let WhitePhoenix = new Jeikepon ('WhitePhoenix', './Img/Whitephoenix.png', 5)
 let RazorEagle = new Jeikepon ('RazorEagle','./Img/RazorEagle.png', 5)
 let Xcorpion = new Jeikepon ('Xcorpion','./Img/Xcorpion.png', 5)
 
-Drawid.attackss.push(
-    {name: '🔥', id:'fire-button'},
-    {name: '🔥', id:'fire-button'},
-    {name: '🔥', id:'fire-button'},
-    {name: '🌬️', id:'wind-button'},
-    {name: '🪨', id:'earth-button'},
+Drawid.attacks.push(
+    { nombre: '🔥', id:'fire-button' },
+    { nombre: '🔥', id:'fire-button' },
+    { nombre: '🔥', id:'fire-button' },
+    { nombre: '🌬️', id:'wind-button' },
+    { nombre: '🪨', id:'earth-button' },
 )
-Orchiwet.attackss.push(
-    {name: '💦', id:'water-button'},
-    {name: '💦', id:'water-button'},
-    {name: '🌬️', id:'wind-button'},
-    {name: '🌬️', id:'wind-button'},
-    {name: '🪨', id:'earth-button'},
+Orchiwet.attacks.push(
+    { nombre: '💦', id:'water-button' },
+    { nombre: '💦', id:'water-button' },
+    { nombre: '🌬️', id:'wind-button' },
+    { nombre: '🌬️', id:'wind-button' },
+    { nombre: '🪨', id:'earth-button' },
 )
-Toprock.attackss.push(
-    {name: '💦', id:'water-button'},
-    {name: '💦', id:'water-button'},
-    {name: '🪨', id:'earth-button'},
-    {name: '🪨', id:'earth-button'},
-    {name: '🪨', id:'earth-button'},
+Toprock.attacks.push(
+    { nombre: '💦', id:'water-button' },
+    { nombre: '💦', id:'water-button' },
+    { nombre: '🪨', id:'earth-button' },
+    { nombre: '🪨', id:'earth-button' },
+    { nombre: '🪨', id:'earth-button' },
 )
-Vessptox.attackss.push(
-    {name: '🔥', id:'fire-button'},
-    {name: '🌬️', id:'wind-button'},
-    {name: '🪨', id:'earth-button'},
-    {name: '🪨', id:'earth-button'},
-    {name: '🪨', id:'earth-button'},
+Vessptox.attacks.push(
+    { nombre: '🔥', id:'fire-button' },
+    { nombre: '🌬️', id:'wind-button' },
+    { nombre: '🪨', id:'earth-button' },
+    { nombre: '🪨', id:'earth-button' },
+    { nombre: '🪨', id:'earth-button' },
 )
-Frogblex.attackss.push(
-    {name: '💦', id:'water-button'},
-    {name: '💦', id:'water-button'},
-    {name: '🔥', id:'fire-button'},
-    {name: '💦', id:'water-button'},
-    {name: '🪨', id:'earth-button'},
+Frogblex.attacks.push(
+    { nombre: '💦', id:'water-button' },
+    { nombre: '💦', id:'water-button' },
+    { nombre: '🔥', id:'fire-button' },
+    { nombre: '💦', id:'water-button' },
+    { nombre: '🪨', id:'earth-button' },
 )
-WhitePhoenix.attackss.push(
-    {name: '🔥', id:'fire-button'},
-    {name: '🔥', id:'fire-button'},
-    {name: '🔥', id:'fire-button'},
-    {name: '🌬️', id:'wind-button'},
-    {name: '🌬️', id:'wind-button'},
+WhitePhoenix.attacks.push(
+    { nombre: '🔥', id:'fire-button' },
+    { nombre: '🔥', id:'fire-button' },
+    { nombre: '🔥', id:'fire-button' },
+    { nombre: '🌬️', id:'wind-button' },
+    { nombre: '🌬️', id:'wind-button' },
 )
-RazorEagle.attackss.push(
-    {name: '🌬️', id:'wind-button'},
-    {name: '🌬️', id:'wind-button'},
-    {name: '🌬️', id:'wind-button'},
-    {name: '🌬️', id:'wind-button'},
-    {name: '🪨', id:'earth-button'},
+RazorEagle.attacks.push(
+    { nombre: '🌬️', id:'wind-button' },
+    { nombre: '🌬️', id:'wind-button' },
+    { nombre: '🌬️', id:'wind-button' },
+    { nombre: '🌬️', id:'wind-button' },
+    { nombre: '🪨', id:'earth-button' },
 )
-Xcorpion.attackss.push(
-    {name: '🔥', id:'fire-button'},
-    {name: '🪨', id:'earth-button'},
-    {name: '🪨', id:'earth-button'},
-    {name: '🪨', id:'earth-button'},
-    {name: '🪨', id:'earth-button'},
+Xcorpion.attacks.push(
+    { nombre: '🔥', id:'fire-button' },
+    { nombre: '🪨', id:'earth-button' },
+    { nombre: '🪨', id:'earth-button' },
+    { nombre: '🪨', id:'earth-button' },
+    { nombre: '🪨', id:'earth-button' },
 )
 jeikepones.push(Drawid, Orchiwet, Toprock, Vessptox, Frogblex, WhitePhoenix, RazorEagle, Xcorpion)
 
@@ -126,10 +125,10 @@ function startgame(){
     
     jeikepones.forEach((Jeikepon) => {
         jeikeponsoption = `
-        <input type="radio" name="pet" id=${Jeikepon.namee} />
-        <label class="Jeikepon_card" for=${Jeikepon.namee}>
-            <p>${Jeikepon.namee}</p>
-            <img src=${Jeikepon.pic} alt=${Jeikepon.namee}>
+        <input type="radio" name="pet" id=${Jeikepon.nombre} />
+        <label class="Jeikepon_card" for=${Jeikepon.nombre}>
+            <p>${Jeikepon.nombre}</p>
+            <img src=${Jeikepon.pic} alt=${Jeikepon.nombre}>
         </label>
         `
         Cardscontainer.innerHTML += jeikeponsoption
@@ -177,6 +176,7 @@ function petchoose(){
         playersPet = inputXcorpion.id
     }else {
         alert('Choose a pet')
+        location.reload()
     }
 
     attackstract(playersPet)
@@ -185,17 +185,16 @@ function petchoose(){
  function attackstract(playersPet){
     let attacks
     for (let i = 0; i < jeikepones.length; i++) {
-        if (playersPet === jeikepones[i].namee){
-            attacks = jeikepones[i].attackss
+        if (playersPet === jeikepones[i].nombre){
+            attacks = jeikepones[i].attacks
         }
-        
     }
     showattacks(attacks)
  }
  function showattacks(attacks){
-    attacks.forEach((attacks) => {
+    attacks.forEach((attack) => {
         jeikeponattacks = `
-        <button id=${attacks.id} class="atack-button BAttack">${attacks.name}</button>
+        <button id=${attack.id} class="atack-button BAttack">${attack.nombre}</button>
         `
         attacksContainer.innerHTML += jeikeponattacks
     })
@@ -210,33 +209,41 @@ function petchoose(){
  }
  function AttackSecuense() {
     buttons.forEach((button) => {
-        button.addEventListener('click', (e)=> {
-            if (e.target.textcontent === '🔥') {
-                playerattacks.push('FIRE')
-                button.style.background = '#112f58'                
-            } else if (e.target.textcontent === '🌬️') {
-                playerattacks.push('WIND')
-                button.style.background = '#112f58'                
-            } else if (e.target.textcontent === '💦') {
-                playerattacks.push('WATER')
-                button.style.background = '#112f58'                
-            } else {
-                playerattacks.push('EARTH')
+        button.addEventListener('click', (e) => {
+            if (e.target.textContent === '🔥') {
+                playerattack.push('FIRE')
                 button.style.background = '#112f58'
+                button.disabled = true
+                console.log(playerattack)                
+            } else if (e.target.textContent === '🌬️') {
+                playerattack.push('WIND')
+                button.style.background = '#112f58'
+                button.disabled = true
+                console.log(playerattack)                
+            } else if (e.target.textContent === '💦') {
+                playerattack.push('WATER')
+                button.style.background = '#112f58'
+                button.disabled = true    
+                console.log(playerattack)            
+            } else {
+                playerattack.push('EARTH')
+                button.style.background = '#112f58'
+                button.disabled = true
+                console.log(playerattack)
             }
             enemyRandomAttack ()
         })
     })
  }
  function enemyspetchoose(){
-    let enemy = randomselector(0,jeikepones.length-1)
-    spanEnemysPet.innerHTML = jeikepones[enemy].namee
-    enemyJeikeponAttacks = jeikepones[enemy].attackss
+    let enemy = randomselector(0, jeikepones.length -1)
+    spanEnemysPet.innerHTML = jeikepones[enemy].nombre
+    enemyJeikeponAttacks = jeikepones[enemy].attacks
     AttackSecuense()
 }
 function enemyRandomAttack (){
-    let RandomAttack = randomselector(0,enemyJeikeponAttacks.length-1)
-    if(RandomAttack ==0||RandomAttack ==1){
+    let RandomAttack = randomselector(0,enemyJeikeponAttacks.length -1)
+    if(RandomAttack == 0||RandomAttack == 1){
         enemyAttack.push('FIRE')
     } else if(RandomAttack ==2){
         enemyAttack.push('WIND')
@@ -244,46 +251,62 @@ function enemyRandomAttack (){
         enemyAttack.push('WATER')
     } else {
         enemyAttack.push('EARTH')
-    }    
-    combat()
+    }
+    console.log(enemyAttack)    
+    combatinit()
+}
+function combatinit(){
+    if (playerattack === 5) {
+        combat()
+    }
+}
+
+function indexsamenemys(player, enemy){
+    indexplayerAttack = playerattack[player]
+    indexenemyAttack = enemyAttack[enemy]
 }
 function combat() {
-    if (playerattack == enemyAttack){
-        messageCreator('Draw!')
-    }else if ((playerattack == Attacks[2] && enemyAttack == Attacks[1]) || (playerattack == Attacks[2] && enemyAttack == Attacks[0])||(playerattack == Attacks[1] && enemyAttack == Attacks[3])||(playerattack == Attacks[1] && enemyAttack == Attacks[0])|| (playerattack == Attacks[0] && enemyAttack == Attacks[3])||(playerattack == Attacks[3] && enemyAttack == Attacks[2])){
-        messageCreator('Win!')
-        enemyLives--
-        spanEnemysLives.innerHTML= enemyLives
-    }else {
-        messageCreator('lost!')
-        playerLives--
-        spanPlayerLives.innerHTML= playerLives
-    }
-    countLives()
+    
+   for (let index = 0; index < playerattack.length; index++) {
+        if (playerattack[index] === enemyAttack[index]) {
+            indexsamenemys(index, index)
+            messageCreator('Draw!')
+        }else if ((playerattack[index] == 'WATER' && enemyAttack[index] == 'FIRE') || (playerattack[index] == 'WATER' && enemyAttack[index] == 'WIND')||(playerattack[index] == 'FIRE' && enemyAttack[index] == 'EARTH')||(playerattack[index] == 'FIRE' && enemyAttack[index] == 'WIND')|| (playerattack[index] == 'WIND' && enemyAttack[index] == 'EARTH')||(playerattack[index] == 'EARTH' && enemyAttack[index] == 'WATER')){
+            indexsamenemys(index,index)
+            messageCreator('Win!')
+            playerwins++
+            spanPlayerLives.innerHTML = playerwins
+        }else {
+            indexsamenemys(index, index)
+            messageCreator('lost!')
+            enemywins++
+            spanEnemysLives.innerHTML= enemywins
+        }
+   }
+    countWins()
 }
-function countLives(){
-    if (enemyLives == 0){
+
+function countWins(){
+    if (playerwins == enemywins) {
+        finalMessage("WOW, It's a draw")        
+    } else if (playerwins > enemywins) {
         finalMessage("Congratulations, you win!")
-    }else if (playerLives == 0){
+    }else{
         finalMessage("Unfortunately, you lost!")
     }
 }
 function messageCreator(result){
-    let newPlayerAttack= document.createElement('p')
+    let newplayerattacks= document.createElement('p')
     let newEnemyAttack = document.createElement('p')
     messageSection.innerHTML = result
-    newPlayerAttack.innerHTML = playerattack
-    newEnemyAttack.innerHTML = enemyAttack
+    newplayerattacks.innerHTML = indexplayerAttack
+    newEnemyAttack.innerHTML = indexenemyAttack
     
-    player_attacks.appendChild(newPlayerAttack)
+    player_attacks.appendChild(newplayerattacks)
     enemy_attacks.appendChild(newEnemyAttack)
 }
 function finalMessage(finalResult){
     messageSection.innerHTML = finalResult
-    windButton.disabled = true
-    fireButton.disabled = true
-    waterButton.disabled = true
-    earthButton.disabled = true
     sectionRestart.style.display = 'block'
 }
 function restart(){

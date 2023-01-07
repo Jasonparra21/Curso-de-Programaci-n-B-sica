@@ -102,7 +102,7 @@ input:checked + label {
     font-family: 'Poppins', sans-serif;
 }
 
-.attack{
+.attacks{
     display: grid;
     grid-template-columns: 100px 100px;
 }
