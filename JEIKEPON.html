@@ -15,15 +15,24 @@
         </div>        
         <button id="pet-button"> Choose </button>
     </section>
+
+    <section id="Show-Map">
+        <h1 class="game_title"> Recorre el mapa con tu JEIKEPON</h1>
+        <canvas id="Map"></canvas>
+        <button onmouseup="stopmovement()" onmousedown="moveUp()">Up</button>
+        <button onmouseup="stopmovement()" onmousedown="moveLeft()">Left</button>
+        <button onmouseup="stopmovement()" onmousedown="moveDown()">Down</button>
+        <button onmouseup="stopmovement()" onmousedown="moveRight()">Right</button>
+    </section>
+
     <section id="Choose_attack">
         <h1 class="game_title"> JEIKEPON! 🌬️🔥💦🪨</h1>
         <h2 class="subtitle"> Choose yout attack </h2>
         <div id="attacks_container" class="attack-cards">
-            <!-- <button id="wind-button" class="atack-button"> Wind 🌬️</button> -->
         </div>
         
         <div id="message">
-            <p id="RESULT">GOOD LUCK!</p>
+            <p id="result">GOOD LUCK!</p>
             <section id="Restart">                    
             <button id="restart-button">Restart</button>
             </section>

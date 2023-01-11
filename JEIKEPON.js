@@ -12,11 +12,14 @@ const spanEnemysPet = document.getElementById('enemysPet')
 const spanPlayerLives = document.getElementById('playerLives')
 const spanEnemysLives = document.getElementById('enemyLives')
 
-const messageSection = document.getElementById('RESULT')
+const messageSection = document.getElementById('result')
 const player_attacks = document.getElementById('player-attacks')
 const enemy_attacks = document.getElementById('enemy-attacks')
 const Cardscontainer = document.getElementById('Cards_container')
 const attacksContainer = document.getElementById('attacks_container')
+
+const sectionShowMap = document.getElementById('Show-Map')
+const map = document.getElementById('Map')
 
 let jeikepones = []
 let playerattack =[]
@@ -31,6 +34,7 @@ let inputWhitePhoenix
 let inputRazorEagle 
 let inputXcorpion 
 let playersPet
+let myJeikepon
 let jeikeponattacks
 let enemyJeikeponAttacks
 let windButton 
@@ -42,15 +46,38 @@ let indexenemyAttack
 let indexplayerAttack
 let playerwins = 0
 let enemywins = 0
+let lienzo = map.getContext("2d")
+let range
+let backgroundMap = new Image()
+backgroundMap.src='./Img/mokemap.jpg'
 
 class Jeikepon {
-    constructor (nombre, pic, live){
+    constructor (nombre, pic, live, x = 10, y = 10){
 
         this.nombre = nombre
         this.pic = pic
         this.live = live
         this.attacks =[]
+        this.x = x
+        this.y = y
+        this.ancho = 80
+        this.alto = 80
+        this.picMap= new Image()
+        this.picMap.src = pic
+        this.speedX=0
+        this.speedY=0
     }
+
+    drawJeikepon(){
+        lienzo.drawImage(
+            this.picMap,
+            this.x,
+            this.y,
+            this.alto,
+            this.ancho,
+        )
+    }
+
 }
 
 let Drawid = new  Jeikepon ('Drawid','./Img/Blue-Dragon.png', 5)
@@ -61,8 +88,23 @@ let Frogblex = new Jeikepon ('Frogblex', './Img/Frogblex.png', 5)
 let WhitePhoenix = new Jeikepon ('WhitePhoenix', './Img/Whitephoenix.png', 5)
 let RazorEagle = new Jeikepon ('RazorEagle','./Img/RazorEagle.png', 5)
 let Xcorpion = new Jeikepon ('Xcorpion','./Img/Xcorpion.png', 5)
+let EnemyDrawid = new  Jeikepon ('Drawid','./Img/Blue-Dragon.png', 5, 50,200)
+let EnemyOrchiwet = new Jeikepon ('Orchiwet', './Img/Orchiwet.png',5,100, 150)
+let EnemyToprock = new Jeikepon ('Toprock','./Img/Toprock.png', 5, 280, 200)
+let EnemyVessptox = new Jeikepon ('Vessptox','./Img/Vessptox.png', 5, 130, 75)
+let EnemyFrogblex = new Jeikepon ('Frogblex', './Img/Frogblex.png', 5, 90, 140)
+let EnemyWhitePhoenix = new Jeikepon ('WhitePhoenix', './Img/Whitephoenix.png', 5, 90, 160)
+let EnemyRazorEagle = new Jeikepon ('RazorEagle','./Img/RazorEagle.png', 5, 280, 10)
+let EnemyXcorpion = new Jeikepon ('Xcorpion','./Img/Xcorpion.png', 5, 110, 150)
 
 Drawid.attacks.push(
+    { nombre: '🔥', id:'fire-button' },
+    { nombre: '🔥', id:'fire-button' },
+    { nombre: '🔥', id:'fire-button' },
+    { nombre: '🌬️', id:'wind-button' },
+    { nombre: '🪨', id:'earth-button' },
+)
+EnemyDrawid.attacks.push(
     { nombre: '🔥', id:'fire-button' },
     { nombre: '🔥', id:'fire-button' },
     { nombre: '🔥', id:'fire-button' },
@@ -76,7 +118,21 @@ Orchiwet.attacks.push(
     { nombre: '🌬️', id:'wind-button' },
     { nombre: '🪨', id:'earth-button' },
 )
+EnemyOrchiwet.attacks.push(
+    { nombre: '💦', id:'water-button' },
+    { nombre: '💦', id:'water-button' },
+    { nombre: '🌬️', id:'wind-button' },
+    { nombre: '🌬️', id:'wind-button' },
+    { nombre: '🪨', id:'earth-button' },
+)
 Toprock.attacks.push(
+    { nombre: '💦', id:'water-button' },
+    { nombre: '💦', id:'water-button' },
+    { nombre: '🪨', id:'earth-button' },
+    { nombre: '🪨', id:'earth-button' },
+    { nombre: '🪨', id:'earth-button' },
+)
+EnemyToprock.attacks.push(
     { nombre: '💦', id:'water-button' },
     { nombre: '💦', id:'water-button' },
     { nombre: '🪨', id:'earth-button' },
@@ -90,7 +146,21 @@ Vessptox.attacks.push(
     { nombre: '🪨', id:'earth-button' },
     { nombre: '🪨', id:'earth-button' },
 )
+EnemyVessptox.attacks.push(
+    { nombre: '🔥', id:'fire-button' },
+    { nombre: '🌬️', id:'wind-button' },
+    { nombre: '🪨', id:'earth-button' },
+    { nombre: '🪨', id:'earth-button' },
+    { nombre: '🪨', id:'earth-button' },
+)
 Frogblex.attacks.push(
+    { nombre: '💦', id:'water-button' },
+    { nombre: '💦', id:'water-button' },
+    { nombre: '🔥', id:'fire-button' },
+    { nombre: '💦', id:'water-button' },
+    { nombre: '🪨', id:'earth-button' },
+)
+EnemyFrogblex.attacks.push(
     { nombre: '💦', id:'water-button' },
     { nombre: '💦', id:'water-button' },
     { nombre: '🔥', id:'fire-button' },
@@ -104,7 +174,21 @@ WhitePhoenix.attacks.push(
     { nombre: '🌬️', id:'wind-button' },
     { nombre: '🌬️', id:'wind-button' },
 )
+EnemyWhitePhoenix.attacks.push(
+    { nombre: '🔥', id:'fire-button' },
+    { nombre: '🔥', id:'fire-button' },
+    { nombre: '🔥', id:'fire-button' },
+    { nombre: '🌬️', id:'wind-button' },
+    { nombre: '🌬️', id:'wind-button' },
+)
 RazorEagle.attacks.push(
+    { nombre: '🌬️', id:'wind-button' },
+    { nombre: '🌬️', id:'wind-button' },
+    { nombre: '🌬️', id:'wind-button' },
+    { nombre: '🌬️', id:'wind-button' },
+    { nombre: '🪨', id:'earth-button' },
+)
+EnemyRazorEagle.attacks.push(
     { nombre: '🌬️', id:'wind-button' },
     { nombre: '🌬️', id:'wind-button' },
     { nombre: '🌬️', id:'wind-button' },
@@ -118,10 +202,18 @@ Xcorpion.attacks.push(
     { nombre: '🪨', id:'earth-button' },
     { nombre: '🪨', id:'earth-button' },
 )
+EnemyXcorpion.attacks.push(
+    { nombre: '🔥', id:'fire-button' },
+    { nombre: '🪨', id:'earth-button' },
+    { nombre: '🪨', id:'earth-button' },
+    { nombre: '🪨', id:'earth-button' },
+    { nombre: '🪨', id:'earth-button' },
+)
 jeikepones.push(Drawid, Orchiwet, Toprock, Vessptox, Frogblex, WhitePhoenix, RazorEagle, Xcorpion)
 
 function startgame(){
     chooseAttack.style.display  = 'none'
+    sectionShowMap.style.display = 'none'
     
     jeikepones.forEach((Jeikepon) => {
         jeikeponsoption = `
@@ -148,7 +240,7 @@ function startgame(){
 }
 function petchoose(){
     choosePet.style.display  = 'none'
-    chooseAttack.style.display  = 'flex'
+   
 
     if (inputDrawid.checked) {
         spanPlayerPet.innerHTML = inputDrawid.id
@@ -180,7 +272,8 @@ function petchoose(){
     }
 
     attackstract(playersPet)
-    enemyspetchoose()
+    sectionShowMap.style.display = 'flex' 
+    mapInit()
 }
  function attackstract(playersPet){
     let attacks
@@ -241,6 +334,7 @@ function petchoose(){
     enemyJeikeponAttacks = jeikepones[enemy].attacks
     AttackSecuense()
 }
+
 function enemyRandomAttack (){
     let RandomAttack = randomselector(0,enemyJeikeponAttacks.length -1)
     if(RandomAttack == 0||RandomAttack == 1){
@@ -251,12 +345,12 @@ function enemyRandomAttack (){
         enemyAttack.push('WATER')
     } else {
         enemyAttack.push('EARTH')
-    }
-    console.log(enemyAttack)    
+    }   
     combatinit()
 }
+
 function combatinit(){
-    if (playerattack === 5) {
+    if (playerattack.length === 5) {
         combat()
     }
 }
@@ -271,8 +365,8 @@ function combat() {
         if (playerattack[index] === enemyAttack[index]) {
             indexsamenemys(index, index)
             messageCreator('Draw!')
-        }else if ((playerattack[index] == 'WATER' && enemyAttack[index] == 'FIRE') || (playerattack[index] == 'WATER' && enemyAttack[index] == 'WIND')||(playerattack[index] == 'FIRE' && enemyAttack[index] == 'EARTH')||(playerattack[index] == 'FIRE' && enemyAttack[index] == 'WIND')|| (playerattack[index] == 'WIND' && enemyAttack[index] == 'EARTH')||(playerattack[index] == 'EARTH' && enemyAttack[index] == 'WATER')){
-            indexsamenemys(index,index)
+        }else if ((playerattack[index] === 'WATER' && enemyAttack[index] === 'FIRE') || (playerattack[index] === 'WATER' && enemyAttack[index] === 'WIND')||(playerattack[index] === 'FIRE' && enemyAttack[index] === 'EARTH')||(playerattack[index] === 'FIRE' && enemyAttack[index] === 'WIND')|| (playerattack[index] === 'WIND' && enemyAttack[index] === 'EARTH')||(playerattack[index] === 'EARTH' && enemyAttack[index] === 'WATER')){
+            indexsamenemys(index, index)
             messageCreator('Win!')
             playerwins++
             spanPlayerLives.innerHTML = playerwins
@@ -287,7 +381,7 @@ function combat() {
 }
 
 function countWins(){
-    if (playerwins == enemywins) {
+    if (playerwins === enemywins) {
         finalMessage("WOW, It's a draw")        
     } else if (playerwins > enemywins) {
         finalMessage("Congratulations, you win!")
@@ -298,6 +392,7 @@ function countWins(){
 function messageCreator(result){
     let newplayerattacks= document.createElement('p')
     let newEnemyAttack = document.createElement('p')
+    
     messageSection.innerHTML = result
     newplayerattacks.innerHTML = indexplayerAttack
     newEnemyAttack.innerHTML = indexenemyAttack
@@ -314,6 +409,104 @@ function restart(){
 }
 function randomselector (min,max){
     return Math.floor(Math.random()*(max-min+1)+min)
+}
+function drawCanvas(){
+
+    myJeikepon.x=myJeikepon.x + myJeikepon.speedX
+    myJeikepon.y=myJeikepon.y + myJeikepon.speedY
+    lienzo.clearRect(0,0, map.width, map.height)
+    lienzo.drawImage(
+        backgroundMap,
+        0,
+        0,
+        map.width,
+        map.height,
+    )
+    myJeikepon.drawJeikepon()
+    EnemyDrawid.drawJeikepon()
+    EnemyRazorEagle.drawJeikepon()
+    EnemyToprock.drawJeikepon()
+    if(myJeikepon.speedX !== 0 || myJeikepon.speedY !== 0){
+    collitionReviewing(EnemyToprock)
+    collitionReviewing(EnemyRazorEagle)
+    collitionReviewing(EnemyDrawid)
+    }
+}
+function moveUp(){
+    myJeikepon.speedY = - 5
+}
+function moveDown(){
+    myJeikepon.speedY =  5
+}
+function moveLeft(){
+    myJeikepon.speedX =- 5
+}
+function moveRight(){
+    myJeikepon.speedX = 5
+}
+function stopmovement(){
+    myJeikepon.speedX=0
+    myJeikepon.speedY=0
+}
+function keypress(event){
+    switch (event.key) {
+        case 'ArrowUp':
+            moveUp()
+            break;
+        case 'ArrowDown':
+            moveDown()    
+            break;
+        case 'ArrowLeft':
+            moveLeft()
+            break;
+        case 'ArrowRight':
+            moveRight()
+            break;
+        default:
+            break
+    }
+}
+function mapInit(){
+    map.width = 360
+    map.height = 280
+    myJeikepon = objectObtain(playersPet)
+    console.log(myJeikepon, playersPet);
+    range = setInterval(drawCanvas, 50)
+    window.addEventListener('keydown', keypress)
+    window.addEventListener('keyup', stopmovement)
+}
+
+function objectObtain(){
+    for (let i = 0; i < jeikepones.length; i++) {
+        if (playersPet === jeikepones[i].nombre){
+            return jeikepones[i]
+        }
+    }
+}
+
+function collitionReviewing(enemy){
+    const upenemy = enemy.y
+    const downenemy = enemy.y + enemy.alto
+    const rigthenemy = enemy.x + enemy.ancho
+    const leftenemy = enemy.x
+
+    const uppet = myJeikepon.y
+    const downpet = myJeikepon.y + myJeikepon.alto
+    const rightpet = myJeikepon.x + myJeikepon.ancho
+    const leftpet = myJeikepon.x
+
+    if(downpet < upenemy    ||
+       uppet > downenemy    ||
+       rightpet < leftenemy ||
+       leftpet > rigthenemy 
+    ){
+        return
+    }
+    stopmovement()
+    clearInterval(range)
+    chooseAttack.style.display  = 'flex'
+    sectionShowMap.style.display = 'none'
+    enemyspetchoose(enemy)
 }
 window.addEventListener('load',startgame)
 
