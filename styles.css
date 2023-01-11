@@ -118,11 +118,6 @@ input:checked + label {
     align-items: center;
     justify-content: center;
 }
-#Map{
-    border: 2px solid whitesmoke;
-}
-
-
 
 
 

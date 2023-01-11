@@ -50,18 +50,27 @@ let lienzo = map.getContext("2d")
 let range
 let backgroundMap = new Image()
 backgroundMap.src='./Img/mokemap.jpg'
+let searchAltura
+let anchoMap = window.innerWidth-20
+const maxancho = 350
+if (anchoMap > maxancho){
+    anchoMap = maxancho - 20 
+}
+altura=(anchoMap*600)/800
+map.width = anchoMap
+map.height = altura
 
 class Jeikepon {
-    constructor (nombre, pic, live, x = 10, y = 10){
+    constructor (nombre, pic, live){
 
         this.nombre = nombre
         this.pic = pic
         this.live = live
         this.attacks =[]
-        this.x = x
-        this.y = y
         this.ancho = 80
         this.alto = 80
+        this.x =randomselector(0, map.width - this.ancho)
+        this.y = randomselector(0, map.height - this.alto)
         this.picMap= new Image()
         this.picMap.src = pic
         this.speedX=0
@@ -88,14 +97,14 @@ let Frogblex = new Jeikepon ('Frogblex', './Img/Frogblex.png', 5)
 let WhitePhoenix = new Jeikepon ('WhitePhoenix', './Img/Whitephoenix.png', 5)
 let RazorEagle = new Jeikepon ('RazorEagle','./Img/RazorEagle.png', 5)
 let Xcorpion = new Jeikepon ('Xcorpion','./Img/Xcorpion.png', 5)
-let EnemyDrawid = new  Jeikepon ('Drawid','./Img/Blue-Dragon.png', 5, 50,200)
-let EnemyOrchiwet = new Jeikepon ('Orchiwet', './Img/Orchiwet.png',5,100, 150)
-let EnemyToprock = new Jeikepon ('Toprock','./Img/Toprock.png', 5, 280, 200)
-let EnemyVessptox = new Jeikepon ('Vessptox','./Img/Vessptox.png', 5, 130, 75)
-let EnemyFrogblex = new Jeikepon ('Frogblex', './Img/Frogblex.png', 5, 90, 140)
-let EnemyWhitePhoenix = new Jeikepon ('WhitePhoenix', './Img/Whitephoenix.png', 5, 90, 160)
-let EnemyRazorEagle = new Jeikepon ('RazorEagle','./Img/RazorEagle.png', 5, 280, 10)
-let EnemyXcorpion = new Jeikepon ('Xcorpion','./Img/Xcorpion.png', 5, 110, 150)
+let EnemyDrawid = new  Jeikepon ('Drawid','./Img/Blue-Dragon.png', 5)
+let EnemyOrchiwet = new Jeikepon ('Orchiwet', './Img/Orchiwet.png',5)
+let EnemyToprock = new Jeikepon ('Toprock','./Img/Toprock.png', 5)
+let EnemyVessptox = new Jeikepon ('Vessptox','./Img/Vessptox.png', 5)
+let EnemyFrogblex = new Jeikepon ('Frogblex', './Img/Frogblex.png', 5)
+let EnemyWhitePhoenix = new Jeikepon ('WhitePhoenix', './Img/Whitephoenix.png', 5)
+let EnemyRazorEagle = new Jeikepon ('RazorEagle','./Img/RazorEagle.png', 5)
+let EnemyXcorpion = new Jeikepon ('Xcorpion','./Img/Xcorpion.png', 5)
 
 Drawid.attacks.push(
     { nombre: '🔥', id:'fire-button' },
@@ -328,14 +337,14 @@ function petchoose(){
         })
     })
  }
- function enemyspetchoose(){
-    let enemy = randomselector(0, jeikepones.length -1)
-    spanEnemysPet.innerHTML = jeikepones[enemy].nombre
-    enemyJeikeponAttacks = jeikepones[enemy].attacks
+ function enemyspetchoose(enemy){
+    spanEnemysPet.innerHTML = enemy.nombre
+    enemyJeikeponAttacks = enemy.attacks
     AttackSecuense()
 }
 
 function enemyRandomAttack (){
+    console.log('Ataques enemigo', enemyAttack);
     let RandomAttack = randomselector(0,enemyJeikeponAttacks.length -1)
     if(RandomAttack == 0||RandomAttack == 1){
         enemyAttack.push('FIRE')
@@ -467,8 +476,6 @@ function keypress(event){
     }
 }
 function mapInit(){
-    map.width = 360
-    map.height = 280
     myJeikepon = objectObtain(playersPet)
     console.log(myJeikepon, playersPet);
     range = setInterval(drawCanvas, 50)
