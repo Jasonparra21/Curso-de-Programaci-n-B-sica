@@ -119,10 +119,27 @@ input:checked + label {
     justify-content: center;
 }
 
+#Show-Map button {
+    width: 80px;
+    height: 40px;
+    border-radius: 20px;
+    background-color:#6B728E;
+    border: 2px solid;
+    color: aliceblue;
+    margin: 10px 0;
+}
 
 
-@media(max-width: 360px){
+@media(max-width: 560px){
     .Cards, .attack-cards{
+        flex-direction: column;
+    }
+}
+
+@media(max-width: 300px){
+    #Show-Map div {
+        display: flex;
+        align-items: center;
         flex-direction: column;
     }
 }
