@@ -246,7 +246,21 @@ function startgame(){
     })
     petButton.addEventListener('click', petchoose)
     restartButton.addEventListener('click', restart)
+    gameJoin()
 }
+function gameJoin(){
+    fetch('http://localhost:8080/unirse')
+    .then(function(res){
+        console.log(res);
+        if (res.ok){
+            res.text()
+                .then(function(answer){
+                    console.log(answer);
+                })
+        }
+    })
+}
+
 function petchoose(){
     choosePet.style.display  = 'none'
    

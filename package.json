@@ -1,0 +1,23 @@
+{
+  "name": "jeikepon",
+  "version": "1.0.0",
+  "description": "",
+  "main": "JEIKEPON.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jasonparra21/Curso-de-Programacion-Basica.git"
+  },
+  "author": "Jeisson Parra",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Jasonparra21/Curso-de-Programacion-Basica/issues"
+  },
+  "homepage": "https://github.com/Jasonparra21/Curso-de-Programacion-Basica#readme",
+  "dependencies": {
+    "expess": "^0.0.1-security",
+    "express": "^4.18.2"
+  }
+}
