@@ -1,3 +1,4 @@
+//const { application } = require("express")
 const chooseAttack = document.getElementById('Choose_attack')
 const sectionRestart = document.getElementById('Restart')
 sectionRestart.style.display = 'none'
@@ -21,6 +22,7 @@ const attacksContainer = document.getElementById('attacks_container')
 const sectionShowMap = document.getElementById('Show-Map')
 const map = document.getElementById('Map')
 
+let playerId
 let jeikepones = []
 let playerattack =[]
 let enemyAttack = []
@@ -224,12 +226,12 @@ function startgame(){
     chooseAttack.style.display  = 'none'
     sectionShowMap.style.display = 'none'
     
-    jeikepones.forEach((Jeikepon) => {
+    jeikepones.forEach((jeikepon) => {
         jeikeponsoption = `
-        <input type="radio" name="pet" id=${Jeikepon.nombre} />
-        <label class="Jeikepon_card" for=${Jeikepon.nombre}>
-            <p>${Jeikepon.nombre}</p>
-            <img src=${Jeikepon.pic} alt=${Jeikepon.nombre}>
+        <input type="radio" name="pet" id=${jeikepon.nombre} />
+        <label class="Jeikepon_card" for=${jeikepon.nombre}>
+            <p>${jeikepon.nombre}</p>
+            <img src=${jeikepon.pic} alt=${jeikepon.nombre}>
         </label>
         `
         Cardscontainer.innerHTML += jeikeponsoption
@@ -255,7 +257,9 @@ function gameJoin(){
         if (res.ok){
             res.text()
                 .then(function(answer){
-                    console.log(answer);
+                    console.log(answer)
+                    playerId = answer
+
                 })
         }
     })
@@ -294,9 +298,22 @@ function petchoose(){
         location.reload()
     }
 
+    chooseJeikepon(playersPet)
+
     attackstract(playersPet)
     sectionShowMap.style.display = 'flex' 
     mapInit()
+}
+function chooseJeikepon(playerPet){
+    fetch(`http://localhost:8080/jeikepon/${playerId}`,{
+        method:'post',
+        headers:{
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            jeikepon: playerPet
+        })
+    })
 }
  function attackstract(playersPet){
     let attacks
@@ -446,6 +463,7 @@ function drawCanvas(){
         map.height,
     )
     myJeikepon.drawJeikepon()
+        sendPosition(myJeikepon.x,myJeikepon.y)
     EnemyDrawid.drawJeikepon()
     EnemyRazorEagle.drawJeikepon()
     EnemyToprock.drawJeikepon()
@@ -454,6 +472,18 @@ function drawCanvas(){
     collitionReviewing(EnemyRazorEagle)
     collitionReviewing(EnemyDrawid)
     }
+}
+function sendPosition(x,y){
+    fetch(`http://localhost:8080/jeikepon/:playerId/position${playerId}`, {
+        method: 'post',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            x,
+            y
+        })
+    })
 }
 function moveUp(){
     myJeikepon.speedY = - 5

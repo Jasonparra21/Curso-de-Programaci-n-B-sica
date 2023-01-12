@@ -216,3 +216,137 @@ Acabas de dar tu primer paso en el desarrollo full-stack, o sea, en el desarroll
 
 Es solo el primer paso para integrar estos los dos mundos y poder visualizar en un front-end, los datos que el backend procesa o almacena en una base de datos.
 
+
+El intercambio de información entre un backend y un frontend puede realizarse de varias formas. Será importante para ti como programador identificar cuándo utilizar cada uno de ellas.
+
+Notación de Objetos de Javascript
+JSON, o Javascript Object Notation es un estándar para la transferencia de datos entre dos sistemas. Hoy en día, casi todos los protocolos de Internet funcionan por detrás con JSON cuando se trata de enviar y recibir información.
+
+Su sintaxis es algo particular y puede causar confusión al principio. Comprendamos cómo se estructura un JSON y para qué nos servirá:
+
+Estructura de un JSON
+Un JSON está compuesto por claves para acceder a determinados valores.
+
+Composición de un JSON
+El formato JSON no deja de ser texto simple. Para acceder a su información, debemos “parsearlo” para convertir el mismo en un objeto y así poder obtener el valor de sus datos. Para lograr esto, empleamos la función propia de JavaScript JSON.parse('').
+
+Manipulación de un JSON
+Un JSON es un objeto y dentro del mismo puede tener datos del tipo numéricos, texto, booleanos u otros objetos.
+
+Habilitando JSON en ExpressJS
+Para enviar y recibir información en formato JSON con ExpressJS, debes activarlo de forma muy simple.
+
+// Importamos y creamos la aplicación de Express
+const express = require('express');
+const app = express();
+
+// Activamos el formato JSON
+app.use(express.json());
+Con esta simple línea de código, tus endpoints ya puede procesar información en formato JSON.
+
+Envío de parámetros al backend
+Otra manera de enviar información al backend es a través de los parámetros de URL. Los mismos componen y son parte de la URL, por lo tanto, serán obligatorios.
+
+Presta atención al siguiente endpoint:
+
+// Creamos un endpoint del tipo POST
+app.post('/datos/:id', (req, res) => {
+    const id = req.param.id;      // Capturamos parámetros de URL
+    const body = req.body;        // Capturamos el cuerpo de la solicitud
+    console.log(id);
+    console.log(body);
+})
+Observa el :id, el mismo espera recibir un identificador o un número de forma dinámica para utilizar en el código. Puedes capturar este dato por su nombre req.param.id. Si te das cuenta, req es un objeto que tiene un sub-objeto llamado param y dentro posee este el parámetro que envía el cliente desde el front-end.
+
+{
+    "req": {
+        "param": {
+            "id": 123
+        }
+    }
+}
+Puedes enviar este parámetro de URL más información en el cuerpo de la solicitud en formato JSON desde el front-end con el siguiente fetch:
+
+const id = 123;
+fetch(`http://localhost:3000/datos/${id}`, {    // Parámetro de URL
+    method: 'post',          // Indicamos que el endpoint es un POST
+    headers: {
+      'Content-Type': 'application/json'        // Indicamos que estamos enviando un JSON
+    },
+    body: JSON.stringify({    // Creamos un JSON con la información para el backend
+      datos: '12345'
+    })
+  })
+  .then(response => response.json())
+  .then(data => {
+    console.log(data);        // Recibimos la respuesta del backend
+  });
+Los endpoints puede recibir un JSON en el body o el cuerpo de la solicitud. En el mismo puedes enviar tanta información como el backend necesite. Mientras que los parámetros de URL se suelen utilizar para enviar IDs o identificadores de una solo registro.
+
+Conclusión
+Dos formas de enviar información al backend o recibirlas en el front-end, JSON y parámetros de URL. Poco a poco entenderás cuándo usar cada uno. Cuando se trata de mucha información o un solo dato.
+
+Más allá del lenguaje de programación que estamos utilizando, en este caso Javascript junto con NodeJS y ExpressJS, todos funcionan exactamente de la misma manera. Si aprendes a hacerlo con un lenguaje, los conceptos te servirán por siempre para cualquier otro que quieras aprender.
+
+Contribución creada por Kevin Fiorentino (Platzi Contributor) con aportes de Anyilo José Rangel Arias.
+
+El desarrollo de una API REST tiene sus conceptos y características. A medida que crezcan como profesional del software irás aprendiendo más al respecto y ganarás en herramientas para hacer mejor tu trabajo.
+
+¿Qué es una API REST?
+Una API REST, o API RESTful o simplemente API, es el nombre técnico de las aplicaciones backend para la consulta y manipulación de datos por parte de un cliente.
+
+REST significa “Transferencia de Estado Representacional”, por sus siglas en español. Son una serie de principios para el desarrollo de APIs. Algunos de estos principios son:
+
+Utiliza arquitectura cliente-servidor y el protocolo HTTP.
+Ausencia de estado, el backend no guarda el estado de la solicitud.
+Uso de caché para un funcionamiento más rápido.
+Intercambio de información utilizando JSON, XML o texto plano.
+Utilización de verbos GET, POST, PUT, DELETE.
+Las API REST son un concepto del que poco a poco aprenderás más. Hasta el momento, ya conoces los conceptos básicos para la construcción de tu primer backend.
+
+Herramientas del navegador
+Los navegadores web como Chome, Firefox o Safari poseen herramientas para los desarrolladores. La misma te permitirá obtener toda la información necesaria para visualizar qué está sucediendo con tu aplicación.
+
+En tu navegador de preferencia, al apretar F12 podrás abrir las herramientas que el mismo provee para trabajar en tu aplicación. No solo utilizarás VC Code, los navegadores también poseen herramientas muy útiles para hacer mejor tu trabajo.
+
+Herramientas para desarrolladores en el navegador{height="" width=""}
+
+Muchas opciones, muchos botones. Poco a poco irás aprendiendo qué y cómo utilizarlo para visualizar lo que está sucediendo en tu app.
+
+Por ejemplo, la pestaña “Console”, o consola, podrás ejecutar código Javascript e interactuar con tu aplicación o hacer pequeñas pruebas.
+
+Consola del navegador{height="" width=""}
+
+Otra pestaña muy importante es “Network”, o red si tienes el navegador en español. La misma te permitirá visualizar todas las solicitudes que el front-end realice al backend.
+
+Red del navegador{height="" width=""}
+
+Esta opción será la más trascendental para poder observar los datos que entran y salen de un front-end. Puedes observar información como el estado de cada petición, el verbo HTTP, la URL, el tamaño de información, entre otros datos.
+
+Conclusión
+En esta clase has sumado algunos conceptos o herramientas más que tienes que conocer para poco a poco continuar incrementando tu conocimiento en el mundo de la programación.
+
+Por un lado, el desarrollo de API si es de tu preferencia la programación backend. Por otro lado, las herramientas que los navegadores proveen a los desarrolladores para ayudarlos en su trabajo cada día.
+
+Los navegadores no son todos iguales, tiene pequeñas diferencias, pero a grandes rasgos, te encontrarás con las mismas opciones y las mismas configuraciones. Te invito a que explores la consola de todos los navegadores que tengas en tu computador.
+A medida que tu aplicación crezca y tengas más y más código, habrá errores, es inevitable tenerlos. Los errores en un software se denominan BUG y el proceso de identificarlos y solucionarlo lo conocemos como DEBUGGING.
+
+Errores en una aplicación
+Te habrás dado cuenta de que la palabra BUG significa Insecto o bicho en inglés. Este término se originó en el siglo XIX cuando se construían complicadas y enormes máquinas. A estas máquinas se les llegaban a meter bichos (BUGS) y estorbaban el movimiento de alguna de sus piezas haciendo que fallaran.
+
+El término Bug comenzó a popularizarse en los años '40 cuando operadores de una gran máquina encontraron una polilla atascada en el interior de la misma.
+
+Primer BUG de la historia de la computación
+Pegaron el bicho a un reporte explicando los motivos de los fallos de la máquina y desde entonces decimos “bug” cuando nuestra aplicación tiene un error.
+
+Proceso de solución de bugs
+Hay diversos tipos de bugs dependiendo la gravedad del error que esté causando en un sistema. El proceso de identificar los mismos y solucionarlos es conocido como “Debug” o “Debuging”.
+
+Las herramientas para desarrolladores de los navegadores serán tu mejor aliado y te darán mucha información para localizar un fallo y solucionarlo.
+
+Conclusión
+Bug y Debug, dos términos del cual oirás mucho al respecto a medida que te sumerjas en el mundo del desarrollo de software.
+
+“Puedes demostrar la presencia de bugs en una aplicación, pero no puedes demostrar la ausencia de los mismos.” (Vuelve a leer esta frase). No es posible demostrar que un sistema funciona bien al 100%. Puede haber bugs en donde sea y por este motivo también existen profesionales expertos en encontrarlos denominados Testers.
+
+Te toparás con bugs toda tu vida como programador. Aprender a debuguear de acuerdo al lenguaje o a la tecnología que estés utilizando te permitirá solucionar los mismos.
