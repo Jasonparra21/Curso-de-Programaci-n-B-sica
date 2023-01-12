@@ -56,7 +56,14 @@ app.post('/jeikepon/:playerId/position',(req,res)=> {
     if (playerIndex >= 0){
         players[playerIndex].updatePosition(x,y)
     }
-    res.end()
+
+    const enemys = players.filter((player) => playerId !== player.id)
+
+
+
+    res.send({
+        enemys
+    })
 })
 
 

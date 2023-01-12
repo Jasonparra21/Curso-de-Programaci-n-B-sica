@@ -63,8 +63,8 @@ map.width = anchoMap
 map.height = altura
 
 class Jeikepon {
-    constructor (nombre, pic, live){
-
+    constructor (nombre, pic, live, id = null){
+        this.id = id
         this.nombre = nombre
         this.pic = pic
         this.live = live
@@ -99,127 +99,73 @@ let Frogblex = new Jeikepon ('Frogblex', './Img/Frogblex.png', 5)
 let WhitePhoenix = new Jeikepon ('WhitePhoenix', './Img/Whitephoenix.png', 5)
 let RazorEagle = new Jeikepon ('RazorEagle','./Img/RazorEagle.png', 5)
 let Xcorpion = new Jeikepon ('Xcorpion','./Img/Xcorpion.png', 5)
-let EnemyDrawid = new  Jeikepon ('Drawid','./Img/Blue-Dragon.png', 5)
-let EnemyOrchiwet = new Jeikepon ('Orchiwet', './Img/Orchiwet.png',5)
-let EnemyToprock = new Jeikepon ('Toprock','./Img/Toprock.png', 5)
-let EnemyVessptox = new Jeikepon ('Vessptox','./Img/Vessptox.png', 5)
-let EnemyFrogblex = new Jeikepon ('Frogblex', './Img/Frogblex.png', 5)
-let EnemyWhitePhoenix = new Jeikepon ('WhitePhoenix', './Img/Whitephoenix.png', 5)
-let EnemyRazorEagle = new Jeikepon ('RazorEagle','./Img/RazorEagle.png', 5)
-let EnemyXcorpion = new Jeikepon ('Xcorpion','./Img/Xcorpion.png', 5)
 
-Drawid.attacks.push(
+const Drawid_Attacks = [
     { nombre: '🔥', id:'fire-button' },
     { nombre: '🔥', id:'fire-button' },
     { nombre: '🔥', id:'fire-button' },
     { nombre: '🌬️', id:'wind-button' },
     { nombre: '🪨', id:'earth-button' },
-)
-EnemyDrawid.attacks.push(
-    { nombre: '🔥', id:'fire-button' },
-    { nombre: '🔥', id:'fire-button' },
-    { nombre: '🔥', id:'fire-button' },
-    { nombre: '🌬️', id:'wind-button' },
-    { nombre: '🪨', id:'earth-button' },
-)
-Orchiwet.attacks.push(
+]
+
+const Orchiwet_Attacks = [
     { nombre: '💦', id:'water-button' },
     { nombre: '💦', id:'water-button' },
     { nombre: '🌬️', id:'wind-button' },
     { nombre: '🌬️', id:'wind-button' },
     { nombre: '🪨', id:'earth-button' },
-)
-EnemyOrchiwet.attacks.push(
-    { nombre: '💦', id:'water-button' },
-    { nombre: '💦', id:'water-button' },
-    { nombre: '🌬️', id:'wind-button' },
-    { nombre: '🌬️', id:'wind-button' },
-    { nombre: '🪨', id:'earth-button' },
-)
-Toprock.attacks.push(
+]
+const Toprock_attacks = [
     { nombre: '💦', id:'water-button' },
     { nombre: '💦', id:'water-button' },
     { nombre: '🪨', id:'earth-button' },
     { nombre: '🪨', id:'earth-button' },
     { nombre: '🪨', id:'earth-button' },
-)
-EnemyToprock.attacks.push(
-    { nombre: '💦', id:'water-button' },
-    { nombre: '💦', id:'water-button' },
-    { nombre: '🪨', id:'earth-button' },
-    { nombre: '🪨', id:'earth-button' },
-    { nombre: '🪨', id:'earth-button' },
-)
-Vessptox.attacks.push(
+]
+const Vessptox_Attacks = [
     { nombre: '🔥', id:'fire-button' },
     { nombre: '🌬️', id:'wind-button' },
     { nombre: '🪨', id:'earth-button' },
     { nombre: '🪨', id:'earth-button' },
     { nombre: '🪨', id:'earth-button' },
-)
-EnemyVessptox.attacks.push(
-    { nombre: '🔥', id:'fire-button' },
-    { nombre: '🌬️', id:'wind-button' },
-    { nombre: '🪨', id:'earth-button' },
-    { nombre: '🪨', id:'earth-button' },
-    { nombre: '🪨', id:'earth-button' },
-)
-Frogblex.attacks.push(
+]
+const Frogblex_Attacks = [
     { nombre: '💦', id:'water-button' },
     { nombre: '💦', id:'water-button' },
     { nombre: '🔥', id:'fire-button' },
     { nombre: '💦', id:'water-button' },
     { nombre: '🪨', id:'earth-button' },
-)
-EnemyFrogblex.attacks.push(
-    { nombre: '💦', id:'water-button' },
-    { nombre: '💦', id:'water-button' },
-    { nombre: '🔥', id:'fire-button' },
-    { nombre: '💦', id:'water-button' },
-    { nombre: '🪨', id:'earth-button' },
-)
-WhitePhoenix.attacks.push(
+]
+const WhitePhoenix_Attacks = [
     { nombre: '🔥', id:'fire-button' },
     { nombre: '🔥', id:'fire-button' },
     { nombre: '🔥', id:'fire-button' },
     { nombre: '🌬️', id:'wind-button' },
     { nombre: '🌬️', id:'wind-button' },
-)
-EnemyWhitePhoenix.attacks.push(
-    { nombre: '🔥', id:'fire-button' },
-    { nombre: '🔥', id:'fire-button' },
-    { nombre: '🔥', id:'fire-button' },
-    { nombre: '🌬️', id:'wind-button' },
-    { nombre: '🌬️', id:'wind-button' },
-)
-RazorEagle.attacks.push(
+]
+const RazorEagle_Attacks = [
     { nombre: '🌬️', id:'wind-button' },
     { nombre: '🌬️', id:'wind-button' },
     { nombre: '🌬️', id:'wind-button' },
     { nombre: '🌬️', id:'wind-button' },
     { nombre: '🪨', id:'earth-button' },
-)
-EnemyRazorEagle.attacks.push(
-    { nombre: '🌬️', id:'wind-button' },
-    { nombre: '🌬️', id:'wind-button' },
-    { nombre: '🌬️', id:'wind-button' },
-    { nombre: '🌬️', id:'wind-button' },
-    { nombre: '🪨', id:'earth-button' },
-)
-Xcorpion.attacks.push(
+]
+const Xcorpion_Attacks = [
     { nombre: '🔥', id:'fire-button' },
     { nombre: '🪨', id:'earth-button' },
     { nombre: '🪨', id:'earth-button' },
     { nombre: '🪨', id:'earth-button' },
     { nombre: '🪨', id:'earth-button' },
-)
-EnemyXcorpion.attacks.push(
-    { nombre: '🔥', id:'fire-button' },
-    { nombre: '🪨', id:'earth-button' },
-    { nombre: '🪨', id:'earth-button' },
-    { nombre: '🪨', id:'earth-button' },
-    { nombre: '🪨', id:'earth-button' },
-)
+]
+Drawid.attacks.push(...Drawid_Attacks)
+Orchiwet.attacks.push(...Orchiwet_Attacks)
+Toprock.attacks.push(...Toprock_attacks)
+Vessptox.attacks.push(...Vessptox_Attacks)
+Frogblex.attacks.push(...Frogblex_Attacks)
+WhitePhoenix.attacks.push(...WhitePhoenix_Attacks)
+RazorEagle.attacks.push(...RazorEagle_Attacks)
+Xcorpion.attacks.push(...Xcorpion_Attacks)
+
 jeikepones.push(Drawid, Orchiwet, Toprock, Vessptox, Frogblex, WhitePhoenix, RazorEagle, Xcorpion)
 
 function startgame(){
@@ -464,13 +410,8 @@ function drawCanvas(){
     )
     myJeikepon.drawJeikepon()
         sendPosition(myJeikepon.x,myJeikepon.y)
-    EnemyDrawid.drawJeikepon()
-    EnemyRazorEagle.drawJeikepon()
-    EnemyToprock.drawJeikepon()
     if(myJeikepon.speedX !== 0 || myJeikepon.speedY !== 0){
-    collitionReviewing(EnemyToprock)
-    collitionReviewing(EnemyRazorEagle)
-    collitionReviewing(EnemyDrawid)
+    collitionReviewing()
     }
 }
 function sendPosition(x,y){
@@ -483,6 +424,39 @@ function sendPosition(x,y){
             x,
             y
         })
+    })
+    .then(function (res) {
+        if (res.ok){
+            res.json()
+                .then(function({enemys}){
+                    console.log(enemys)
+                    enemys.forEach(function(enemy){
+                        let enemyJeikepon = null
+                        const jeikeponName = enemy.jeikepon.nombre || ''
+                        if (jeikeponName === 'Drawid'){
+                            enemyJeikepon = new  Jeikepon ('Drawid','./Img/Blue-Dragon.png', 5)
+                        }else if (jeikeponName === 'Orchiwet'){
+                            enemyJeikepon = new Jeikepon ('Orchiwet', './Img/Orchiwet.png',5)
+                        }else if (jeikeponName === 'Toprock'){
+                            enemyJeikepon = new Jeikepon ('Toprock','./Img/Toprock.png', 5)
+                        }else if (jeikeponName === 'Vessptox'){
+                            enemyJeikepon = new Jeikepon ('Vessptox','./Img/Vessptox.png', 5)
+                        }else if (jeikeponName === 'Frogblex'){
+                            enemyJeikepon = new Jeikepon ('Frogblex', './Img/Frogblex.png', 5)
+                        }else if (jeikeponName === 'WhitePhoenix'){
+                            enemyJeikepon = new Jeikepon ('WhitePhoenix', './Img/Whitephoenix.png', 5)
+                        }else if (jeikeponName === 'RazorEagle'){
+                            enemyJeikepon = new Jeikepon ('RazorEagle','./Img/RazorEagle.png', 5)
+                        }else if (jeikeponName === 'Xcorpion'){
+                            enemyJeikepon = new Jeikepon ('Xcorpion','./Img/Xcorpion.png', 5)
+                        }
+                        enemyJeikepon.x = enemy.x
+                        enemyJeikepon.y = enemy.y 
+                        
+                        enemyJeikepon.drawJeikepon()
+                    })
+                })
+            }
     })
 }
 function moveUp(){
