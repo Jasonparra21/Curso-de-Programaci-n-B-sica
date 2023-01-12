@@ -20,9 +20,10 @@ const Cardscontainer = document.getElementById('Cards_container')
 const attacksContainer = document.getElementById('attacks_container')
 
 const sectionShowMap = document.getElementById('Show-Map')
-const map = document.getElementById('Map')
+const MAPA = document.getElementById('Map')
 
-let playerId
+let playerId = null
+let enemyId = null
 let jeikepones = []
 let playerattack =[]
 let enemyAttack = []
@@ -49,7 +50,7 @@ let indexenemyAttack
 let indexplayerAttack
 let playerwins = 0
 let enemywins = 0
-let lienzo = map.getContext("2d")
+let lienzo = MAPA.getContext("2d")
 let range
 let backgroundMap = new Image()
 backgroundMap.src='./Img/mokemap.jpg'
@@ -60,8 +61,8 @@ if (anchoMap > maxancho){
     anchoMap = maxancho - 20 
 }
 altura=(anchoMap*600)/800
-map.width = anchoMap
-map.height = altura
+MAPA.width = anchoMap
+MAPA.height = altura
 
 class Jeikepon {
     constructor (nombre, pic, live, id = null){
@@ -72,8 +73,8 @@ class Jeikepon {
         this.attacks =[]
         this.ancho = 80
         this.alto = 80
-        this.x =randomselector(0, map.width - this.ancho)
-        this.y = randomselector(0, map.height - this.alto)
+        this.x =randomselector(0, MAPA.width - this.ancho)
+        this.y = randomselector(0, MAPA.height - this.alto)
         this.picMap= new Image()
         this.picMap.src = pic
         this.speedX=0
@@ -262,6 +263,7 @@ function chooseJeikepon(playerPet){
         })
     })
 }
+
  function attackstract(playersPet){
     let attacks
     for (let i = 0; i < jeikepones.length; i++) {
@@ -311,9 +313,38 @@ function chooseJeikepon(playerPet){
                 button.disabled = true
                 console.log(playerattack)
             }
-            enemyRandomAttack ()
+           if (playerattack.length === 5){
+            sendAttacks()
+           }
+           
         })
     })
+ }
+ function sendAttacks(){
+    fetch(`http://localhost:8080/jeikepon/${playerId}/attacks`, {
+        method: 'post',
+        headers: {
+            'Content-Type' : 'application/json'
+        },
+        body: JSON.stringify({
+            attacks: playerattack
+        })
+    })
+    range = setInterval(getAttacks, 50)
+ }
+ function getAttacks(){
+    fetch(`http://localhost:8080/jeikepon/${enemyId}/attacks`)
+        .then(function(res){
+            if(res.ok){
+                res.json()
+                .then(function ({attacks}) {
+                    if (attacks.length ===5){
+                        enemyAttack = attacks
+                        combat()
+                    }
+                })
+            }
+        })
  }
  function enemyspetchoose(enemy){
     spanEnemysPet.innerHTML = enemy.nombre
@@ -347,7 +378,7 @@ function indexsamenemys(player, enemy){
     indexenemyAttack = enemyAttack[enemy]
 }
 function combat() {
-    
+    clearInterval(range)
    for (let index = 0; index < playerattack.length; index++) {
         if (playerattack[index] === enemyAttack[index]) {
             indexsamenemys(index, index)
@@ -401,13 +432,13 @@ function drawCanvas(){
 
     myJeikepon.x=myJeikepon.x + myJeikepon.speedX
     myJeikepon.y=myJeikepon.y + myJeikepon.speedY
-    lienzo.clearRect(0,0, map.width, map.height)
+    lienzo.clearRect(0,0, MAPA.width, MAPA.height)
     lienzo.drawImage(
         backgroundMap,
         0,
         0,
-        map.width,
-        map.height,
+        MAPA.width,
+        MAPA.height,
     )
     myJeikepon.drawJeikepon()
         sendPosition(myJeikepon.x,myJeikepon.y)
@@ -431,26 +462,25 @@ function sendPosition(x,y){
         if (res.ok){
             res.json()
                 .then(function({enemys}){
-                    console.log(enemys)
                     enemyJeikepon = enemys.map(function(enemy){
                         let enemyJeikepon = null
-                        const jeikeponName = enemy.jeikepon.nombre || ''
+                        const jeikeponName = enemy.jeikepon.nombre || ""
                         if (jeikeponName === 'Drawid'){
-                            enemyJeikepon = new  Jeikepon ('Drawid','./Img/Blue-Dragon.png', 5)
+                            enemyJeikepon = new  Jeikepon ('Drawid','./Img/Blue-Dragon.png', 5, enemy.id)
                         }else if (jeikeponName === 'Orchiwet'){
-                            enemyJeikepon = new Jeikepon ('Orchiwet', './Img/Orchiwet.png',5)
+                            enemyJeikepon = new Jeikepon ('Orchiwet', './Img/Orchiwet.png',5, enemy.id)
                         }else if (jeikeponName === 'Toprock'){
-                            enemyJeikepon = new Jeikepon ('Toprock','./Img/Toprock.png', 5)
+                            enemyJeikepon = new Jeikepon ('Toprock','./Img/Toprock.png', 5, enemy.id)
                         }else if (jeikeponName === 'Vessptox'){
-                            enemyJeikepon = new Jeikepon ('Vessptox','./Img/Vessptox.png', 5)
+                            enemyJeikepon = new Jeikepon ('Vessptox','./Img/Vessptox.png', 5,enemy.id)
                         }else if (jeikeponName === 'Frogblex'){
-                            enemyJeikepon = new Jeikepon ('Frogblex', './Img/Frogblex.png', 5)
+                            enemyJeikepon = new Jeikepon ('Frogblex', './Img/Frogblex.png', 5, enemy.id)
                         }else if (jeikeponName === 'WhitePhoenix'){
-                            enemyJeikepon = new Jeikepon ('WhitePhoenix', './Img/Whitephoenix.png', 5)
+                            enemyJeikepon = new Jeikepon ('WhitePhoenix', './Img/Whitephoenix.png', 5, enemy.id)
                         }else if (jeikeponName === 'RazorEagle'){
-                            enemyJeikepon = new Jeikepon ('RazorEagle','./Img/RazorEagle.png', 5)
+                            enemyJeikepon = new Jeikepon ('RazorEagle','./Img/RazorEagle.png', 5, enemy.id)
                         }else if (jeikeponName === 'Xcorpion'){
-                            enemyJeikepon = new Jeikepon ('Xcorpion','./Img/Xcorpion.png', 5)
+                            enemyJeikepon = new Jeikepon ('Xcorpion','./Img/Xcorpion.png', 5, enemy.id)
                         }
                         enemyJeikepon.x = enemy.x
                         enemyJeikepon.y = enemy.y 
@@ -530,6 +560,7 @@ function collitionReviewing(enemy){
     }
     stopmovement()
     clearInterval(range)
+    enemyId = enemy.id
     chooseAttack.style.display  = 'flex'
     sectionShowMap.style.display = 'none'
     enemyspetchoose(enemy)

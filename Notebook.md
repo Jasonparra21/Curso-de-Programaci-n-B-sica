@@ -350,3 +350,24 @@ Bug y Debug, dos términos del cual oirás mucho al respecto a medida que te sum
 “Puedes demostrar la presencia de bugs en una aplicación, pero no puedes demostrar la ausencia de los mismos.” (Vuelve a leer esta frase). No es posible demostrar que un sistema funciona bien al 100%. Puede haber bugs en donde sea y por este motivo también existen profesionales expertos en encontrarlos denominados Testers.
 
 Te toparás con bugs toda tu vida como programador. Aprender a debuguear de acuerdo al lenguaje o a la tecnología que estés utilizando te permitirá solucionar los mismos.
+
+Si te encuentras aquí, es porque acabas de finalizar tu primer proyecto de software. ¡Felicidades! Hagamos un repaso juntos sobre lo que consiste el desarrollo backend.
+
+Repaso del desarrollo backend
+A lo largo de estas últimas clases, has desarrollado el backend de tu aplicación y has aprendido todos los siguientes conceptos:
+
+¿Qué es un backend?
+Diferencias backend y front-end
+Arquitectura cliente/servidor
+Lenguajes de backend: NodeJS y NPM
+Interfaces de línea de comandos
+Servidor web local con ExpressJS
+HTTP y tipos de solicitudes
+API, URI, URL, URN
+Transferencia de información y JSON
+Mucha nueva información para ti. Te aseguro que todo lo visto en este curso no deja de ser la base del mundo de la programación y dentro poco tiempo serán temas triviales de todos los días y muy fáciles de comprender.
+
+Repasa cada tema que no recuerdes. La mejor forma de aprender algo es explicarlo. Intenta explicarle a un amigo o familiar qué es HTTP, o cuáles son las diferencias entre un backend y un frontend.
+
+Fueron más de 80 clases en total a lo largo de este curso para desarrollar tu videojuego. Ya solo queda probar el mismo en la siguiente clase.
+

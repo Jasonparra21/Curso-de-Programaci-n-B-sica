@@ -16,6 +16,9 @@ class Player{
         this.x = x
         this.y = y
     }
+    assignAttacks(attacks){
+        this.attacks = attacks
+    }
 }
 
 class Jeikepon{
@@ -67,6 +70,26 @@ app.post('/jeikepon/:playerId/position',(req,res)=> {
 })
 
 
+
+app.post('/jeikepon/:playerId/attacks',(req,res)=> {
+    const playerId= req.params.playerId || ''
+    const attacks = req.body.attacks || []
+
+
+    const playerIndex =players.findIndex((player) => playerId === player.id)
+    if (playerIndex >= 0){
+        players[playerIndex].assignAttacks(attacks)
+    }
+    res.end()
+})
+
+app.get('/jeikepon/:playerId/attacks', (req, res) =>{
+    const playerId= req.params.playerId || ''
+    const player = players.find((player) => player.id === playerId)
+    res.send({
+        attacks:player.attacks || []
+    })
+})
 
 
 app.listen(8080, () => {
