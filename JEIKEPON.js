@@ -26,6 +26,7 @@ let playerId
 let jeikepones = []
 let playerattack =[]
 let enemyAttack = []
+let enemyJeikepon = []
 let jeikeponsoption
 let inputDrawid
 let inputOrchiwet
@@ -410,9 +411,10 @@ function drawCanvas(){
     )
     myJeikepon.drawJeikepon()
         sendPosition(myJeikepon.x,myJeikepon.y)
-    if(myJeikepon.speedX !== 0 || myJeikepon.speedY !== 0){
-    collitionReviewing()
-    }
+    enemyJeikepon.forEach (function(jeikepon){
+        jeikepon.drawJeikepon()
+        collitionReviewing(jeikepon)
+    })
 }
 function sendPosition(x,y){
     fetch(`http://localhost:8080/jeikepon/${playerId}/position`, {
@@ -430,7 +432,7 @@ function sendPosition(x,y){
             res.json()
                 .then(function({enemys}){
                     console.log(enemys)
-                    enemys.forEach(function(enemy){
+                    enemyJeikepon = enemys.map(function(enemy){
                         let enemyJeikepon = null
                         const jeikeponName = enemy.jeikepon.nombre || ''
                         if (jeikeponName === 'Drawid'){
@@ -452,8 +454,7 @@ function sendPosition(x,y){
                         }
                         enemyJeikepon.x = enemy.x
                         enemyJeikepon.y = enemy.y 
-                        
-                        enemyJeikepon.drawJeikepon()
+                        return enemyJeikepon
                     })
                 })
             }
