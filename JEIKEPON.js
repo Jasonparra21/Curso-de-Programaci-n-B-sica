@@ -474,7 +474,7 @@ function drawCanvas(){
     }
 }
 function sendPosition(x,y){
-    fetch(`http://localhost:8080/jeikepon/:playerId/position${playerId}`, {
+    fetch(`http://localhost:8080/jeikepon/${playerId}/position`, {
         method: 'post',
         headers: {
             'Content-Type': 'application/json'

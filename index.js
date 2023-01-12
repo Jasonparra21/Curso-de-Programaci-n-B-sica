@@ -12,16 +12,15 @@ class Player{
     assignJeikepon(jeikepon){
         this.jeikepon = jeikepon
     } 
-
+    updatePosition(x,y){
+        this.x = x
+        this.y = y
+    }
 }
 
 class Jeikepon{
     constructor(nombre){
         this.nombre = nombre
-    }
-    updatePosition(x,y){
-        this.x = x
-        this.y = y
     }
 }
 
