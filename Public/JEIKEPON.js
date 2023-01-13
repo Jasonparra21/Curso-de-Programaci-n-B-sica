@@ -214,9 +214,6 @@ function gameJoin(){
 }
 
 function petchoose(){
-    choosePet.style.display  = 'none'
-   
-
     if (inputDrawid.checked) {
         spanPlayerPet.innerHTML = inputDrawid.id
         playersPet = inputDrawid.id
@@ -242,12 +239,12 @@ function petchoose(){
         spanPlayerPet.innerHTML = inputXcorpion.id
         playersPet = inputXcorpion.id
     }else {
-        alert('Choose a pet')
-        location.reload()
+        alert('Choose a pet!!')
+        return
     }
 
+    choosePet.style.display  = 'none'
     chooseJeikepon(playersPet)
-
     attackstract(playersPet)
     sectionShowMap.style.display = 'flex' 
     mapInit()
