@@ -199,7 +199,7 @@ function startgame(){
     gameJoin()
 }
 function gameJoin(){
-    fetch('http://localhost:8080/unirse')
+    fetch('http://192.168.1.8:8080/unirse')
     .then(function(res){
         console.log(res);
         if (res.ok){
@@ -250,7 +250,7 @@ function petchoose(){
     mapInit()
 }
 function chooseJeikepon(playerPet){
-    fetch(`http://localhost:8080/jeikepon/${playerId}`,{
+    fetch(`http://192.168.1.8:8080/jeikepon/${playerId}`,{
         method:'post',
         headers:{
             'Content-Type': 'application/json'
@@ -318,7 +318,7 @@ function chooseJeikepon(playerPet){
     })
  }
  function sendAttacks(){
-    fetch(`http://localhost:8080/jeikepon/${playerId}/attacks`, {
+    fetch(`http://192.168.1.8:8080/jeikepon/${playerId}/attacks`, {
         method: 'post',
         headers: {
             'Content-Type' : 'application/json'
@@ -330,7 +330,7 @@ function chooseJeikepon(playerPet){
     range = setInterval(getAttacks, 50)
  }
  function getAttacks(){
-    fetch(`http://localhost:8080/jeikepon/${enemyId}/attacks`)
+    fetch(`http://192.168.1.8:8080/jeikepon/${enemyId}/attacks`)
         .then(function(res){
             if(res.ok){
                 res.json()
@@ -445,7 +445,7 @@ function drawCanvas(){
     })
 }
 function sendPosition(x,y){
-    fetch(`http://localhost:8080/jeikepon/${playerId}/position`, {
+    fetch(`http://192.168.1.8:8080/jeikepon/${playerId}/position`, {
         method: 'post',
         headers: {
             'Content-Type': 'application/json'
