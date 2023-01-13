@@ -19,11 +19,11 @@
     <section id="Show-Map">
         <h2 class="subtitle"> Recorre el mapa con tu JEIKEPON</h2>
         <canvas id="Map"></canvas>
-        <button onmouseup="stopmovement()" onmousedown="moveUp()">Up</button>
+        <button ontouched="stopmovement()" onmouseup="stopmovement()" ontouchstart="moveUp()" onmousedown="moveUp()">Up</button>
         <div>
-        <button onmouseup="stopmovement()" onmousedown="moveLeft()">Left</button>
-        <button onmouseup="stopmovement()" onmousedown="moveDown()">Down</button>
-        <button onmouseup="stopmovement()" onmousedown="moveRight()">Right</button>
+        <button ontouched="stopmovement()" onmouseup="stopmovement()" ontouchstart="moveLeft()" onmousedown="moveLeft()">Left</button>
+        <button ontouched="stopmovement()" onmouseup="stopmovement()" ontouchstart="moveDown()" onmousedown="moveDown()">Down</button>
+        <button ontouched="stopmovement()" onmouseup="stopmovement()" ontouchstart="moveRight()" onmousedown="moveRight()">Right</button>
         </div>
     </section>
 
